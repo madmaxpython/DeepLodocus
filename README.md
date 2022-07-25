@@ -7,7 +7,7 @@ DeepLodocus is a software in development from the Flores Lab (McGill University,
 It aims to extract behavioral data using output data from [DeepLabCut](http://www.mousemotorlab.org/deeplabcut) (.csv files for now).
 
 ## How it works:
-After training a dedicated DeepLabCut model and tracked animal(s), you will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
+After training a dedicated DeepLabCut model and tracking one or more animal(s), you will be able to define your regions of interest - namely the Zones - in which the total number of entries, time spent and locomotor activity will be calculated for each animal.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others!
 
 ### Step One: Select analysis parameters:
@@ -20,12 +20,12 @@ Here, you define your Zones. In this exemple, only two square zones are defined,
 
 ### Step Three: Run the analysis & Get the output:
 <img width="300" height="130" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/Output_screenshot.png">
-Finally, you get your results in a excel files as well as echoed in the terminal.
+Finally, you get your results in a tabular file as well as in the terminal.
 
-## List of the few scripts available and a short description:
-- main.py : main script 
+## List of the few scripts available for now, with a short description:
+- main.py : main script that you will execute to run your analysis
 - GUI_DLDC.py : in development GUI version of DeepLodocus.
-- utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define.
+- utils.py : contains every functions used by the main.py script to extract the time and number of entries in zones defined.
 - calibvideo.py : allows you to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
 - ToSplit.py : splits a csv containing data of multiple animals in separated single-animal csv.
 
@@ -35,16 +35,16 @@ Finally, you get your results in a excel files as well as echoed in the terminal
 
 <img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/LabelRequirements.png">
 
-The colored point represent the required labels to be tracked on DeepLabCut<br/>
-The red lines represent the skeleton of the animal<br/>
-Individual name : Mouse 1<br/>
+- The colored point represent the required labels to be tracked on DeepLabCut, with their name (case-sensitive)<br/>
+- The red lines represent the skeleton of the animal<br/>
+- Individual name : Mouse 1<br/>
 
 You can find an exemple of the config.yaml that we used to train our model [here](https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/config.yaml).
 
 ### Video name
 Each video name needs to follow the same template: [cagenumber]_[animalID].mp4
 
-This format will alllows to define zones of interest only once for each cage, and thus to identify which animal passed in which cage.
+This format is important and will alllows to define zones of interest only once for each cage, and thus to identify which animal passed in which cage.
 
 _To make it clearer, here is an example:_
 
