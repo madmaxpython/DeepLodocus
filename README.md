@@ -10,6 +10,18 @@ The aim of the software is to extract behavioral data using output data from [De
 After training a dedicated DeepLabCut model, and tracked animal(s) the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others!
 
+#### Step One: Select analysis parameters:
+<img width="470" height="300" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/GUI_screenshot.png">
+At this step, you can define some parameters as which measurement(s) you are interested in, the name of your zone(s) as well as some spec of your videos
+
+#### Step Two: Define the zones:
+<img width="470" height="250" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/AreaSelection_screenshot.png">
+Here, you define your Zones. In this exemple, only two square zones are defined, but these can be of any polygonal shape and any number.
+
+#### Step Three: Run the analysis & Get the output:
+<img width="300" height="130" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/Output_screenshot.png">
+Finally, you get your results in a excel files as well as echoed in the terminal.
+
 ## List of the few scripts available and a short description:
 - main.py : main script 
 - GUI_DLDC.py : in development GUI version of DeepLodocus.
