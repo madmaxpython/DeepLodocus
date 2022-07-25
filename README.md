@@ -7,18 +7,18 @@ DeepLodocus is a software in development from the Flores Lab (McGill University,
 The aim of the software is to extract behavioral data using output data from [DeepLabCut](http://www.mousemotorlab.org/deeplabcut) (.csv files for now).
 
 ## How it works:
-After training a dedicated DeepLabCut model, and tracked animal(s) the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
+After training a dedicated DeepLabCut model and tracked animal(s), the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others!
 
-#### Step One: Select analysis parameters:
+### Step One: Select analysis parameters:
 <img width="470" height="300" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/GUI_screenshot.png">
-At this step, you can define some parameters as which measurement(s) you are interested in, the name of your zone(s) as well as some spec of your videos
+At this step, you can define some parameters like measurement(s) you are interested in, the name of your zone(s) as well as some spec of your videos.
 
-#### Step Two: Define the zones:
+### Step Two: Define the zones:
 <img width="470" height="250" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/AreaSelection_screenshot.png">
 Here, you define your Zones. In this exemple, only two square zones are defined, but these can be of any polygonal shape and any number.
 
-#### Step Three: Run the analysis & Get the output:
+### Step Three: Run the analysis & Get the output:
 <img width="300" height="130" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/Output_screenshot.png">
 Finally, you get your results in a excel files as well as echoed in the terminal.
 
@@ -38,6 +38,8 @@ Finally, you get your results in a excel files as well as echoed in the terminal
 The colored point represent the required labels to be tracked on DeepLabCut<br/>
 The red lines represent the skeleton of the animal<br/>
 Individual name : Mouse 1<br/>
+
+You can find an exemple of the config.yaml that we used to train our model [here](https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/config.yaml).
 
 ### Video name
 Each video name needs to follow the same template: [cagenumber]_[animalID].mp4
