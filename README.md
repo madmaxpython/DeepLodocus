@@ -15,7 +15,7 @@ The aim of the software is too extract behavioral data using output data from [D
 
 
 ## What we need : 
-### config.yaml 
+### <u>config.yaml</u>
 
 <img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
 
