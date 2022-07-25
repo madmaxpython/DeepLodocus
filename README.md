@@ -15,7 +15,7 @@ This basic functions can be applicated to numerous daily behavioural test as Ele
 - GUI_DLDC.py : in development GUI version of DeepLodocus.
 - utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define by the user.
 - calibvideo.py : allows the user to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
-- ToSplit.py : split a csv containing data of multiple animals in separated single-animal csv.
+- ToSplit.py : splits a csv containing data of multiple animals in separated single-animal csv.
 
 
 ## What we need : 
@@ -23,7 +23,7 @@ This basic functions can be applicated to numerous daily behavioural test as Ele
 
 <img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
 
-The colored point represent the required label to be tracked on DeepLabCut<br/>
+The colored point represent the required labels to be tracked on DeepLabCut<br/>
 The red lines represent the skeleton of the animal<br/>
 Individual name : Mouse 1<br/>
 
@@ -34,7 +34,7 @@ This format will alllows to define zones of interest only once for each cage, an
 
 _To make it clearer, here is an example:_
 
-_In my experiment, I have 20 mice and 4 skinner boxes (1 to 4). Let's imagine that I make 5 rotations of 4 mice (one animal in each box), I would have:_
+_In my experiment, I had 20 mice and 4 skinner boxes (1 to 4). Let's imagine that I made 5 rotations of 4 mice (one animal in each box), I would have:_
 - _4 videos names starting with 1__[animalID].mp4,
 - _4 videos names starting with 2__[animalID].mp4,
 - _4 videos names starting with 3__[animalID].mp4,
