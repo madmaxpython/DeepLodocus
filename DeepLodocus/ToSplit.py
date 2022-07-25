@@ -1,10 +1,5 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-Created on Tue Jul 19 19:00:09 2022
-
-@author: maximeteixeira
-"""
 
 import pandas as pd
 from shapely.geometry import Point
@@ -30,7 +25,7 @@ class mouse():
             if globals()[f"zone{x}"].contains(self.point):
                 self.identity=name[x-1]
                 print(self, ' is ', self.identity)
-                self.data.to_csv('/Users/maximeteixeira/Desktop/DeepLodocus/ToSplit/Splitted/'+self.identity+'.csv')
+                self.data.to_csv('/ToSplit/Splitted/'+self.identity+'.csv')
                 
                 
                 
