@@ -1,4 +1,4 @@
- <font size="30"> DeepLodocus </font>
+ <u> DeepLodocus </u>
  
 DeepLodocus is a software in development from the Flores Lab (McGill University, Montreal).
 
