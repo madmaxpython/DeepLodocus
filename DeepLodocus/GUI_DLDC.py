@@ -6,22 +6,10 @@ Created on Wed Apr 27 10:39:14 2022
 @author: maximeteixeira
 """
 
-import glob, os
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from numpy import sqrt as sqrt
-import math
-import matplotlib.image as mpimg
-from matplotlib.widgets import PolygonSelector
-import utils as analysis
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
+import os
 import json
 from pathlib import Path
-
-# Explicit imports to satisfy Flake8
-from tkinter import Tk, Canvas, Entry, Text, Button, PhotoImage
+from tkinter import Tk, Canvas, Entry, Button, PhotoImage
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
