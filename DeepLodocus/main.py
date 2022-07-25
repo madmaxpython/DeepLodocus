@@ -9,13 +9,7 @@ Created on Wed Apr 27 10:39:14 2022
 import glob, os
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-from numpy import sqrt as sqrt
-import math
-import matplotlib.image as mpimg
-from matplotlib.widgets import PolygonSelector
 import utils as analysis
-from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
 import json
 from pathlib import Path

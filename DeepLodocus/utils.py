@@ -1,4 +1,3 @@
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
@@ -7,7 +6,6 @@ Created on Wed Apr  6 18:23:43 2022
 @author: maximeteixeira
 """
 
-import os
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -17,7 +15,6 @@ import matplotlib.image as mpimg
 from matplotlib.widgets import PolygonSelector
 from  shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-import json
 
 def TotalDistance(config, data_reduced, likelihood):
     temp_dist = []

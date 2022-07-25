@@ -6,15 +6,9 @@ Created on Mon Apr 25 16:40:02 2022
 @author: maximeteixeira
 """
 import os, glob
-import pandas as pd
-import numpy as np
 import matplotlib.pyplot as plt
-from numpy import sqrt as sqrt
-import math
 import matplotlib.image as mpimg
 from matplotlib.widgets import PolygonSelector
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
 import json
 from pathlib import Path
 import random
