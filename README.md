@@ -1,7 +1,7 @@
 # DeepLodocus 
 
-div align="center">
-  <img width="350" height="350" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/dldc-WHITE-repository-open-graph-template.png">
+<div align="center">
+  <img width="700" height="350" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/dldc-WHITE-repository-open-graph-template.png">
 </div>
  
 DeepLodocus is a software in development from the Flores Lab (McGill University, Montreal).
