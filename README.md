@@ -15,8 +15,22 @@ The aim of the software is too extract behavioral data using output data from [D
 
 
 ## What we need : 
-###config.yaml
+### config.yaml 
 
-<img width="270" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
+<img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
+- The colored point represent the required label to be tracked on DeepLabCut
+- The red lines represent the skeleton of the animal 
+- Individual name : Mouse 1
+
+Each video name needs to follow the same template: [cagenumber]_[animalID].mp4
+
+This format will alllows to define  zones of interest only once for each cage, and thus to identify which animal passed in which cage.
+
+_To make it clearer, here is an example:
+_In my experiment, I have 20 mice and 4 skinner boxes (1 to 4). Let's imagine that I make 5 rotations of 4 mice (one animal in each box), I would have:
+- _4 videos names starting with 1_[animalID].mp4,
+- _4 videos names starting with 2_[animalID].mp4,
+- _4 videos names starting with 3_[animalID].mp4,
+- _4 videos names starting with 4_[animalID].mp4,
 
 
