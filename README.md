@@ -18,9 +18,10 @@ The aim of the software is too extract behavioral data using output data from [D
 ### config.yaml 
 
 <img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
-- The colored point represent the required label to be tracked on DeepLabCut
-- The red lines represent the skeleton of the animal 
-- Individual name : Mouse 1
+
+The colored point represent the required label to be tracked on DeepLabCut<br/>
+The red lines represent the skeleton of the animal<br/>
+Individual name : Mouse 1<br/>
 
 ### Video name
 Each video name needs to follow the same template: [cagenumber]_[animalID].mp4
