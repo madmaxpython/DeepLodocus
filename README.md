@@ -6,8 +6,8 @@ DeepLodocus is a software in development from the Flores Lab (McGill University,
 
 The aim of the software is too extract behavioral data using output data from [DeepLabCut](http://www.mousemotorlab.org/deeplabcut) (.csv files for now).
 
-##How it works:
-After training a dedicated DeepLabCut model, and tracked animal(s) the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus. 
+## How it works:
+After training a dedicated DeepLabCut model, and tracked animal(s) the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others
 
 ## List of the few scripts available and a short description:
