@@ -7,7 +7,7 @@ DeepLodocus is a software in development from the Flores Lab (McGill University,
 The aim of the software is to extract behavioral data using output data from [DeepLabCut](http://www.mousemotorlab.org/deeplabcut) (.csv files for now).
 
 ## How it works:
-After training a dedicated DeepLabCut model and tracked animal(s), the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
+After training a dedicated DeepLabCut model and tracked animal(s), you will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others!
 
 ### Step One: Select analysis parameters:
@@ -25,8 +25,8 @@ Finally, you get your results in a excel files as well as echoed in the terminal
 ## List of the few scripts available and a short description:
 - main.py : main script 
 - GUI_DLDC.py : in development GUI version of DeepLodocus.
-- utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define by the user.
-- calibvideo.py : allows the user to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
+- utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define.
+- calibvideo.py : allows you to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
 - ToSplit.py : splits a csv containing data of multiple animals in separated single-animal csv.
 
 
