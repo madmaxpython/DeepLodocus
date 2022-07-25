@@ -7,33 +7,33 @@ DeepLodocus is a software in development from the Flores Lab (McGill University,
 The aim of the software is to extract behavioral data using output data from [DeepLabCut](http://www.mousemotorlab.org/deeplabcut) (.csv files for now).
 
 ## How it works:
-After training a dedicated DeepLabCut model and tracked animal(s), the user will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
+After training a dedicated DeepLabCut model and tracked animal(s), you will be able to define regions of interest - namely Zones - in which the total time spend and the number of entries in these zone, as well as the total locomotor activity will be calculated by DeepLodocus.<br/>
 This basic functions can be applicated to numerous daily behavioural test as Elevated Plus Maze, Dark-Light Box, Conditioned Place Preference, and many others!
 
 ### Step One: Select analysis parameters:
-<img width="470" height="300" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/GUI_screenshot.png">
+<img width="470" height="300" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/GUI_screenshot.png">
 At this step, you can define some parameters like measurement(s) you are interested in, the name of your zone(s) as well as some spec of your videos.
 
 ### Step Two: Define the zones:
-<img width="470" height="250" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/AreaSelection_screenshot.png">
+<img width="470" height="250" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/AreaSelection_screenshot.png">
 Here, you define your Zones. In this exemple, only two square zones are defined, but these can be of any polygonal shape and any number.
 
 ### Step Three: Run the analysis & Get the output:
-<img width="300" height="130" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/Output_screenshot.png">
+<img width="300" height="130" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/Output_screenshot.png">
 Finally, you get your results in a excel files as well as echoed in the terminal.
 
 ## List of the few scripts available and a short description:
 - main.py : main script 
 - GUI_DLDC.py : in development GUI version of DeepLodocus.
-- utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define by the user.
-- calibvideo.py : allows the user to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
+- utils.py : contains every function used by the main.py script in order to extract the time and number of entries in zones define.
+- calibvideo.py : allows you to define zones of interest. Save the coordinate of these zones in the 'zone.txt' file.
 - ToSplit.py : splits a csv containing data of multiple animals in separated single-animal csv.
 
 
 ## What we need : 
 ### config.yaml
 
-<img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/LabelRequirements.png">
+<img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/LabelRequirements.png">
 
 The colored point represent the required labels to be tracked on DeepLabCut<br/>
 The red lines represent the skeleton of the animal<br/>
