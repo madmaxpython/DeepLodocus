@@ -1,4 +1,11 @@
 # DeepLodocus 
+[![Pipeline](https://gitlab.mpcdf.mpg.de/lucasmir/deepof/badges/master/pipeline.svg)](https://gitlab.mpcdf.mpg.de/lucasmir/deepof/-/pipelines)
+[![Coverage](https://gitlab.mpcdf.mpg.de/lucasmir/deepof/badges/master/coverage.svg)](https://coverage.readthedocs.io/en/coverage-5.3/)
+[![Documentation Status](https://readthedocs.org/projects/deepof/badge/?version=latest)](https://deepof.readthedocs.io/en/latest)
+[![CodeFactor](https://www.codefactor.io/repository/github/lucasmiranda42/deepof/badge)](https://www.codefactor.io/repository/github/lucasmiranda42/deepof)
+[![Version](https://img.shields.io/badge/release-v0.1.6-informational)](https://pypi.org/project/deepof/)
+[![MLFPM](https://img.shields.io/badge/funding-MLFPM-informational)](https://mlfpm.eu/)
+[![Black](https://img.shields.io/badge/code%20style-black-black)](https://github.com/psf/black)
 
 <img width="700" height="350" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Logo/dldc-WHITE-repository-open-graph-template.png">
  
