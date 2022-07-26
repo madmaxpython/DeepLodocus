@@ -33,7 +33,7 @@ Finally, you get your results in a tabular file as well as in the terminal.
 ## What we need : 
 ### config.yaml
 
-<img width="300" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/LabelRequirements.png">
+<img width="250" height="400" src="https://github.com/madmaxpython/DeepLodocus/blob/Master/Docs/Images/LabelRequirements.png">
 
 - The colored point represent the required labels to be tracked on DeepLabCut, with their name (case-sensitive)<br/>
 - The red lines represent the skeleton of the animal<br/>
