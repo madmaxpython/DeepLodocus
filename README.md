@@ -49,9 +49,9 @@ This format is important and will alllows to define zones of interest only once 
 _To make it clearer, here is an example:_
 
 _In my experiment, I had 20 mice and 4 skinner boxes (1 to 4). Let's imagine that I made 5 rotations of 4 mice (one animal in each box), I would have:_
-- _4 videos names starting with 1__[animalID].mp4,
-- _4 videos names starting with 2__[animalID].mp4,
-- _4 videos names starting with 3__[animalID].mp4,
-- _4 videos names starting with 4__[animalID].mp4,
+- _5 videos names starting with 1__[animalID].mp4 --> 1_Mice1.mp4, 1_Mice2.mp4, 1_Mice3.mp4, 1_Mice4.mp4, 1_Mice5.mp4
+- _5 videos names starting with 2__[animalID].mp4 --> 2_Mice6.mp4 2_Mice7.mp4 2_Mice8.mp4, 2_Mice9.mp4, 2_Mice10.mp4,
+- _5 videos names starting with 3__[animalID].mp4 --> 3_Mice11.mp4, 3_Mice12.mp4, 3_Mice13.mp4, 3_Mice14.mp4, 3_Mice15.mp4,
+- _5 videos names starting with 4__[animalID].mp4 --> 4_Mice16.mp4, 4_Mice17.mp4, 4_Mice18.mp4, 4_Mice19.mp4, 4_Mice20.mp4,
 
 
