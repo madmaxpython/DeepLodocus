@@ -21,8 +21,6 @@ with open(script_path+'/config.txt', "r") as config_file:
     config = json.loads(config_file.read())
 
 
-config['path_env']=script_path
-
 class Mouse ():
     num_of_mice=0
     
@@ -30,7 +28,7 @@ class Mouse ():
         self.csvname = csvname
         self.cage=csvname[0]
         self.name = csvname.split('_')[1].split('.')[0]
-        self.data = pd.read_csv(config['path_env']+'/Datas/'+self.csvname,header=[1,2,3], index_col=0)
+        self.data = pd.read_csv(script_path+'/Datas/'+self.csvname,header=[1,2,3], index_col=0)
         self.likelihood = np.array(self.data.loc[:, [x for x in self.data.columns.values if 'likelihood'  in str(x)]])
         #Create a dataframe without likelihood columns
         columns_to_use = [x for x in self.data.columns.values if 'likelihood' not in str(x)]
@@ -39,7 +37,7 @@ class Mouse ():
         Mouse.num_of_mice+=1
         
     def analyze_zone(self):
-        with open(config['path_env']+"/zone.txt", "r") as zone_file:
+        with open(script_path+"/zone.txt", "r") as zone_file:
             areas = json.loads(zone_file.read())
 
         for zone in areas:
@@ -59,8 +57,8 @@ class Mouse ():
 df_analysis=pd.DataFrame()
 
 #Look for csv files, and create an instance Mouse for each of them
-for file in glob.glob(os.path.join(config['path_env'],'Datas', "*.csv")):
-    mouse_id = glob.glob(os.path.join(config['path_env'],'Datas', "*.csv")).index(file)
+for file in glob.glob(os.path.join(script_path,'Datas', "*.csv")):
+    mouse_id = glob.glob(os.path.join(script_path,'Datas', "*.csv")).index(file)
     globals()[f"mouse_{mouse_id}"]=Mouse(file.split("Datas/",1)[1])
     df_analysis[globals()[f"mouse_{mouse_id}"].name]=0
         
@@ -108,7 +106,7 @@ for mice_nb in range (Mouse.num_of_mice):
         
     
 print('\n \nData CPP Video __________________________________________________\n', df_analysis)
-df_analysis.to_excel(config['path_env'] +'/Output/'+str(Mouse.num_of_mice)+ config['output_excel'])
+df_analysis.to_excel(script_path +'/Output/'+config['output_excel']+'.xlsx')
 
 
         

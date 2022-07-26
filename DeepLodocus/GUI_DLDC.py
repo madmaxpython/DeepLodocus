@@ -30,10 +30,13 @@ def selectzone():
 def save():
     global config
     
-    entre = entry_1.get()
-    config['zone_name']= list(entre.split(" "))
+    ZoneName = entry_1.get()
+    if ZoneName != '':
+        config['zone_name']= list(ZoneName.split(" "))
+    OutputName = entry_4.get()
+    if OutputName != '':
+        config['output_excel']= str(OutputName)
     strconfig=json.dumps(config)
-    print(strconfig)
     
     # Write the file out again
     with open(OUTPUT_PATH+'/config.txt', 'w') as file:
@@ -41,8 +44,6 @@ def save():
         
     with open(OUTPUT_PATH+'/config.txt', "r") as config:
         config = json.loads(config.read())
-    
-    print(config)
     
     
 def MakeTrue(val,button ):
@@ -308,7 +309,7 @@ canvas.create_text(
     743.0,
     343.0,
     anchor="nw",
-    text="Number of animals",
+    text="Pixel Size",
     fill="#000000",
     font=("Inter Regular", 20 * -1)
 )
@@ -336,7 +337,7 @@ canvas.create_text(
     743.0,
     407.0,
     anchor="nw",
-    text="Pixel size",
+    text="Output File Name",
     fill="#000000",
     font=("Inter Regular", 20 * -1)
 )

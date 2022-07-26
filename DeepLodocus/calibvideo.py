@@ -54,7 +54,7 @@ def onSelect(x):
 def zone_file(config, VIDEO_TO_TREAT):
     areas_list={}
 
-    for cage in range (1,config['nb_cage']+1):
+    for cage in range (1,20):
         current_cage=[]
         for element in VIDEO_TO_TREAT:
             if element[0]==str(cage):
