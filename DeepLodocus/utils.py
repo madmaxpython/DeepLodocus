@@ -15,6 +15,7 @@ import matplotlib.image as mpimg
 from matplotlib.widgets import PolygonSelector
 from  shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
+from tkinter import Tk , Entry, Button, Label
 
 def TotalDistance(config, data_reduced, likelihood):
     temp_dist = []
@@ -100,3 +101,32 @@ def TotalTime(config, areas, data_reduced,  likelihood, cage):
         time_zone[t]=time_zone[t]/4
     zone_dict={'time_zone': time_zone, 'entries_zone':entries_zone}
     return zone_dict
+
+def OutputName():
+    def saveFct():
+        global FileName
+        FileName = str(e1.get())
+        if FileName !="":
+            print('File Name will be: {}'.format(FileName))
+            master.quit()
+            
+        
+
+    master = Tk()
+    Label(master, text="Output File Name").grid(row=0)
+    master.title("Save Your File")
+
+    e1 = Entry(master)
+    e1.grid(row=0, column=1)
+
+    b1 = Button(master,
+                text='Save',
+                command=saveFct)
+
+    b1.grid(row=0, column=2)
+
+    master.mainloop()
+    
+    return(FileName)
+    
+    

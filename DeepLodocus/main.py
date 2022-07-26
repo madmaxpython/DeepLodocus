@@ -104,7 +104,7 @@ for mice_nb in range (Mouse.num_of_mice):
             df_analysis.loc['Distance travelled (cm)']=list_distance
         
         
-    
+config['output_excel']=analysis.OutputName()
 print('\n \nData CPP Video __________________________________________________\n', df_analysis)
 df_analysis.to_excel(script_path +'/Output/'+config['output_excel']+'.xlsx')
 
