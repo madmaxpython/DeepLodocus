@@ -10,6 +10,7 @@ import os
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
+from utils import OutputName
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -21,9 +22,13 @@ def relative_to_assets(path: str) -> Path:
     return ASSETS_PATH / Path(path)
 
 def run():
-    os.system('python '+ OUTPUT_PATH+'/main.py')
+    save()
+    FILE_NAME = str(OutputName())
+    os.system('python '+ OUTPUT_PATH+'/main.py '+FILE_NAME)
 
 def selectzone():
+    global config
+    save()
     os.system('python '+ OUTPUT_PATH+'/calibvideo.py')
     
     
@@ -33,9 +38,7 @@ def save():
     ZoneName = entry_1.get()
     if ZoneName != '':
         config['zone_name']= list(ZoneName.split(" "))
-    OutputName = entry_4.get()
-    if OutputName != '':
-        config['output_excel']= str(OutputName)
+        
     strconfig=json.dumps(config)
     
     # Write the file out again
@@ -337,7 +340,7 @@ canvas.create_text(
     743.0,
     407.0,
     anchor="nw",
-    text="Output File Name",
+    text="Video End",
     fill="#000000",
     font=("Inter Regular", 20 * -1)
 )

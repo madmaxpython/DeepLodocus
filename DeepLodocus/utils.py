@@ -21,7 +21,7 @@ def TotalDistance(config, data_reduced, likelihood):
     temp_dist = []
     chunk_size=int(config['fps_camera']/4)
     prev_x_y=0
-    for i in range(0,30000,chunk_size):
+    for i in range(0,len(data_reduced)-100,chunk_size):
         chunk = data_reduced['Mouse 1']['spine1'][i:i+chunk_size]
 
         j=0
@@ -62,7 +62,7 @@ def TotalTime(config, areas, data_reduced,  likelihood, cage):
     
     localization='' #variable of the localization (zone) of the animal
 
-    for frame in range (0,30000, chunk_size):
+    for frame in range (0,len(data_reduced)-100, chunk_size):
         chunk = data_reduced['Mouse 1'][:][frame:frame+chunk_size] #take a chunk of the data 
         bodypart={}
         chunk_row=0 #Comptor through the chunk
@@ -104,11 +104,11 @@ def TotalTime(config, areas, data_reduced,  likelihood, cage):
 
 def OutputName():
     def saveFct():
-        global FileName
         FileName = str(e1.get())
         if FileName !="":
-            print('File Name will be: {}'.format(FileName))
             master.quit()
+            return(FileName)
+            
             
         
 
@@ -127,6 +127,6 @@ def OutputName():
 
     master.mainloop()
     
-    return(FileName)
+    return(saveFct())
     
     
