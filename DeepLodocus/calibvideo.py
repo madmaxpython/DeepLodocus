@@ -33,7 +33,7 @@ def AreaSelector(zone_nb,cage,config, element):
     fig.suptitle('Please, define Zone '+str(config['zone_name'][zone_nb])+' for cage'+str(cage), fontsize=16)
     
     cap = cv2.VideoCapture("/Users/maximeteixeira/Desktop/DeepLodocus/Datas/"+element)
-    randomnb=random.randint(0,30000)
+    randomnb=random.randint(0,300)
     cap.set(1, randomnb)
     
     ret, frame = cap.read()
