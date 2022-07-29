@@ -25,14 +25,14 @@ os.chdir(SCRIPT_PATH+"/Datas")
 VIDEO_TO_TREAT=[]
 for file in glob.glob("*.mp4"):
     VIDEO_TO_TREAT.append(file)
-    
+
 def AreaSelector(zone_nb,cage,config, element):
     fig, ax = plt.subplots()
     ax.invert_yaxis()
     fig.canvas.manager.set_window_title('Calibration Step')
     fig.suptitle('Please, define Zone '+str(config['zone_name'][zone_nb])+' for cage'+str(cage), fontsize=16)
     
-    cap = cv2.VideoCapture("/Users/maximeteixeira/Desktop/DeepLodocus/Datas/"+element)
+    cap = cv2.VideoCapture(SCRIPT_PATH+"/Datas/"+element)
     randomnb=random.randint(0,300)
     cap.set(1, randomnb)
     
