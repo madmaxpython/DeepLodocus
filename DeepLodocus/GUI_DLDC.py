@@ -109,7 +109,7 @@ button_2 = Button(
     image=button_image_2,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("useless button"),
+    command=lambda: os.system('python '+ OUTPUT_PATH+'/videoCrop.py'),
     relief="flat"
 )
 button_2.place(
