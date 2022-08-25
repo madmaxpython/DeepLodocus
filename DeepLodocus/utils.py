@@ -12,7 +12,7 @@ from numpy import sqrt as sqrt
 import random
 from matplotlib.widgets import PolygonSelector
 from shapely.geometry import Point
-from tkinter import Tk, simpledialog
+from tkinter import Tk, simpledialog, filedialog
 import cv2
 
 
@@ -107,6 +107,16 @@ def tkAskString(WINDOW_TITLE, GRID_TITLE):
     root = Tk()
     root.withdraw()
     file_path = simpledialog.askstring(WINDOW_TITLE, GRID_TITLE)
+    return file_path
+
+def FileSelector(TITLE, MULTIPLEFILES, FILETYPES):
+    """
+    Open a file dialog window to select files to transfer
+    return: a list of files directory
+    """
+    root = Tk()
+    root.withdraw()
+    file_path = filedialog.askopenfilenames(title=TITLE, multiple = MULTIPLEFILES, filetypes=FILETYPES)
     return file_path
 
 

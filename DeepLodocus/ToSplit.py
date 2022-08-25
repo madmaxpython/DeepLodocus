@@ -9,20 +9,9 @@ import os
 from pathlib import Path
 from tkinter import Tk, filedialog
 
-from utils import AreaSelector, tkAskString
+from utils import AreaSelector, tkAskString, FileSelector
 
 SCRIPT_PATH = str(Path(__file__).parent)
-
-
-def FileSelector(TITLE, MULTIPLEFILES, FILETYPES):
-    """
-    Open a file dialog window to select files to transfer
-    return: a list of files directory
-    """
-    root = Tk()
-    root.withdraw()
-    file_path = filedialog.askopenfilenames(title=TITLE, multiple = MULTIPLEFILES, filetypes=FILETYPES)
-    return file_path
 
 
 class mouse:
