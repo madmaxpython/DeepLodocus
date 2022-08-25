@@ -4,63 +4,62 @@
 import pandas as pd
 from shapely.geometry import Point
 from shapely.geometry.polygon import Polygon
-import glob, os
+import glob
+import os
 from pathlib import Path
+from tkinter import Tk, filedialog
 
-script_path = str(Path(__file__).parent)
-zone1 = Polygon([[0, 730], [386, 730], [386, 365], [0, 365]])
-zone2 = Polygon([[386, 730], [772, 730], [772, 365], [386, 365]])
-zone3 = Polygon([[0, 0], [0, 365], [386, 365], [386, 0]])
-zone4 = Polygon([[386, 0], [772, 0], [772, 365], [386, 365]])
+from utils import AreaSelector, tkAskString, FileSelector
 
-class mouse():
+SCRIPT_PATH = str(Path(__file__).parent)
+
+
+class mouse:
     def __init__(self, data):
-        self.data=data
-        self.meanx=self.data.iloc[:,0].mean()
-        self.meany=self.data.iloc[:,1].mean()
-        self.point= Point(self.data.iloc[:,0].mean(), self.data.iloc[:,1].mean())
-        
-    def who(self):
-        for x in range(1,5):
+        self.data = data
+        self.meanx = self.data.iloc[:, 0].mean()
+        self.meany = self.data.iloc[:, 1].mean()
+        self.point = Point(self.data.iloc[:, 0].mean(), self.data.iloc[:, 1].mean())
+        self.WhoIsWho()
+
+    def WhoIsWho(self):
+        """
+    self.point: point define by the mean coordinates of the mouse's nose
+    Go through all the zone until self.point is in zone x
+    When so, define self.identity as the mouse name associated with zone and save a csv with self.identity.csv as name
+        """
+        for x in range(1, NUMBER_OF_MICE + 1):
             if globals()[f"zone{x}"].contains(self.point):
-                self.identity=name[x-1]
-                print(self, ' is ', self.identity)
-                self.data.to_csv('/ToSplit/Splitted/'+self.identity+'.csv')
-                
-                
-                
-                
-         
-for file in glob.glob(os.path.join(script_path,'ToSplit', "*.csv")):
-    name=[]
-    
-    data = pd.read_csv(file, index_col=0,)
-    for x in range (0, 108):
-        data.iloc[0, x]= 'Mouse 1'
-    
-    
-    data.columns=pd.MultiIndex.from_arrays(data.iloc[0:3].values)
-    
-    data=data.iloc[3:]
-    data= data.astype(float)
-    print("File: ", file)
-    
-    name.append(str(input("Mouse 1 (Top-left corner): ")))
-    name.append(str(input("Mouse 2 (Top-right corner): ")))
-    name.append(str(input("Mouse 3 (Bottom-left corner): ")))
-    name.append(str(input("Mouse 4 (Bottom-right corner): ")))
-    
-    print("Mice to treat (in order): ", name)
-    mouse1= mouse(data.iloc[:, 0:27])
-    mouse1.who()
-    mouse2= mouse(data.iloc[:, 27:54])
-    mouse2.who()
-    mouse3= mouse(data.iloc[:, 54:81])
-    mouse3.who()
-    mouse4= mouse(data.iloc[:, 81:108])
-    mouse4.who()
-    
+                self.identity = MiceList[x - 1]
+                self.data.to_csv(f"{SCRIPT_PATH}/ToSplit/Splitted/{self.identity}.csv")
+                print(f'Mouse {x} is {MiceList[x - 1]}')
+                break
 
 
+if __name__ == '__main__':
+    CSV_TO_TREAT = FileSelector('Select data to split', True, [("*.csv")])
+    print(CSV_TO_TREAT)
+    for file in glob.glob(os.path.join(SCRIPT_PATH, 'ToSplit', "*.csv")):
+        DATA = pd.read_csv(file, index_col=0)
+        NUMBER_OF_MICE = int(len(DATA.columns)/27)
+        for nb_columns in range(0, 27 * NUMBER_OF_MICE):
+            DATA.iloc[0, nb_columns] = 'Mouse 1'
 
-        
+        DATA.columns = pd.MultiIndex.from_arrays(DATA.iloc[0:3].values)
+        DATA = DATA.iloc[3:]
+        DATA = DATA.astype(float)
+        print("csv file to split: ", file)
+
+        CALIBRATION_VIDEO = FileSelector('Select video', False, [("*")])
+
+        MiceList = []
+        for zone_to_define in range(1, NUMBER_OF_MICE + 1):
+            globals()[f"zone{zone_to_define}"] = Polygon(
+                AreaSelector(f'Please, define cage of Mouse {zone_to_define}', CALIBRATION_VIDEO)
+                                                        )
+            MiceList.append(tkAskString('Select your cage', f'Mouse {zone_to_define} name'))
+
+        print("List of mice: ", MiceList)
+
+        for x in range(len(MiceList)):
+            globals()[f"mouse{x + 1}"] = mouse(DATA.iloc[:, x * 27:(1 + x) * 27])

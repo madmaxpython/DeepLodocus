@@ -8,12 +8,9 @@ Created on Mon Apr 25 16:40:02 2022
 import glob
 import json
 import os
-import random
-from pathlib import Path
 
-import cv2
-import matplotlib.pyplot as plt
-from matplotlib.widgets import PolygonSelector
+from pathlib import Path
+from utils import AreaSelector
 
 SCRIPT_PATH = str(Path(__file__).parent)
 
@@ -27,33 +24,6 @@ for file in glob.glob("*.mp4"):
     VIDEO_TO_TREAT.append(file)
 
 
-def AreaSelector(zone_nb, cage, config, element):
-    fig, ax = plt.subplots()
-    ax.invert_yaxis()
-    fig.canvas.manager.set_window_title('Calibration Step')
-    fig.suptitle('Please, define Zone ' + str(config['zone_name'][zone_nb]) + ' for cage' + str(cage), fontsize=16)
-
-    cap = cv2.VideoCapture(SCRIPT_PATH + "/Datas/" + element)
-    randomnb = random.randint(0, 300)
-    cap.set(1, randomnb)
-
-    ret, frame = cap.read()
-    imgplot = plt.imshow(frame)
-
-    lineprops = {'color': 'red', 'linewidth': 4, 'alpha': 0.8}
-    lsso = PolygonSelector(ax=ax, onselect=onSelect, lineprops=lineprops)
-    plt.show()
-    return coord
-
-
-def onSelect(x):
-    global coord
-    if len(x) != 0:
-        plt.close()
-    coord = x
-    return coord
-
-
 def zone_file(config, VIDEO_TO_TREAT):
     areas_list = {}
 
@@ -65,8 +35,9 @@ def zone_file(config, VIDEO_TO_TREAT):
 
         if current_cage:
             for calibration in range(len(config['zone_name'])):
-                areas_list["Cage" + str(cage) + "_" + "Zone" + str(config['zone_name'][calibration])] = AreaSelector(
-                    calibration, cage, config, current_cage[0])
+                areas_list[f"Cage {cage}_Zone{config['zone_name'][calibration]}"] = AreaSelector(
+                    f"Please, define Zone {config['zone_name'][calibration]} for cage {cage}",
+                    f"{SCRIPT_PATH}/Datas/{element}")
 
     areas_list = json.dumps(areas_list)
 
