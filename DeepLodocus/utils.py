@@ -14,13 +14,27 @@ from matplotlib.widgets import PolygonSelector
 from shapely.geometry import Point
 from tkinter import Tk, simpledialog, filedialog
 import cv2
+import json
 
 
 def TotalDistance(config, data_reduced, likelihood):
+    """
+    Measure the total distance travelled by the mice, using the 'spine1' label
+
+    Parameters
+    ----------
+    config: use config to know the pixel_size and the fps of the video #TODO
+    data_reduced: dataframe with coordinate of the mice without the 'likelihood' columns
+    likelihood: np.array with likelihood value
+
+    Returns: Total distance travelled
+    -------
+    """
+
     temp_dist = []
     chunk_size = int(config['fps_camera'] / 4)
     prev_x_y = 0
-    for i in range(0, len(data_reduced) - 100, chunk_size):
+    for i in range(0, len(data_reduced) - 10, chunk_size):
         chunk = data_reduced['Mouse 1']['spine1'][i:i + chunk_size]
 
         j = 0
@@ -51,15 +65,15 @@ def TotalTime(config, areas, data_reduced, likelihood, cage):
     time_zone = {}
     entries_zone = {}
 
-    for f in config['zone_name']:  # create a key in time & entries dict for each zone
-        time_zone[f] = 0
-        entries_zone[f] = 0
+    for allzone in config['zone_name']:  # create a key in time & entries dict for each zone
+        time_zone[allzone] = 0
+        entries_zone[allzone] = 0
 
     chunk_size = int(config['fps_camera'] / 4)
 
     localization = ''  # variable of the localization (zone) of the animal
 
-    for frame in range(0, len(data_reduced) - 100, chunk_size):
+    for frame in range(0, len(data_reduced) - 10, chunk_size):
         chunk = data_reduced['Mouse 1'][:][frame:frame + chunk_size]  # take a chunk of the data
         bodypart = {}
         chunk_row = 0  # Counter through the chunk
@@ -114,12 +128,16 @@ def FileSelector(TITLE, MULTIPLEFILES, FILETYPES):
     Open a file dialog window to select files to transfer
     return: a list of files directory
     """
-    root = Tk()
-    root.withdraw()
+    selectwindow = Tk()
     file_path = filedialog.askopenfilenames(title=TITLE, multiple = MULTIPLEFILES, filetypes=FILETYPES)
+    selectwindow.quit()
     return file_path
 
-
+def FileSaver(TITLE, FILETYPES):
+    saver = Tk()
+    file_path = filedialog.asksaveasfilename(title=TITLE, filetypes=FILETYPES)
+    saver.quit()
+    return file_path
 def AreaSelector(TITLE_WINDOW, VIDEO_PATH):
     fig, ax = plt.subplots()
     ax.invert_yaxis()
@@ -145,5 +163,14 @@ def onSelect(x):
         plt.close()
     coord = x
     return coord
-def uselss():
-    pass
+
+class dictSerializer:
+    @staticmethod
+    def saveJSON(config, path):
+        with open(path, 'w') as file:
+            file.write(config)
+    @staticmethod
+    def loadJSON(path):
+        with open(path, "r") as dictonary:
+            dictonary = json.loads(dictonary.read())
+        return dictonary
