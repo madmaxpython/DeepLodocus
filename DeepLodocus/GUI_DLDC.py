@@ -10,7 +10,7 @@ import os
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
-from utils import tkAskString
+from utils import FileSaver
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -25,14 +25,14 @@ def relative_to_assets(path: str) -> Path:
 
 def run():
     save()
-    FILE_NAME = str(tkAskString('Save your file', 'Output File Name'))
+    FILE_NAME = FileSaver("Select path to save output", [("Excel file", ".xlsx")])
     os.system('python ' + OUTPUT_PATH + '/main.py ' + FILE_NAME)
 
 
 def selectzone():
     global config
     save()
-    os.system('python ' + OUTPUT_PATH + '/calibvideo.py')
+    os.system('python ' + OUTPUT_PATH + '/selectArena.py')
 
 
 def save():
@@ -313,7 +313,7 @@ if config['analyse_entries']:
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_on.png"))
 elif not config['analyse_entries']:
-    button_image_8 = PhotoImage(
+    button_image_7 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 button_select_entries = Button(
     image=button_image_7,
@@ -330,12 +330,12 @@ button_select_entries.place(
 )
 
 button_image_8 = PhotoImage(
-    file=relative_to_assets("button_on.png"))
+    file=relative_to_assets("button_off.png"))
 button_select_velocity = Button(
     image=button_image_8,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_8 clicked"),
+    command=lambda: print(""),
     relief="flat"
 )
 button_select_velocity.place(
@@ -399,7 +399,7 @@ button_10 = Button(
     image=button_image_10,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print("button_10 clicked"),
+    command=lambda: print(""),
     relief="flat"
 )
 button_10.place(
