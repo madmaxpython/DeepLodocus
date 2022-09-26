@@ -36,7 +36,8 @@ class Animal:
     def __init__(self, datapath):
         self.name = datapath.split('_')[1].split('.')[0]
         self.cage = datapath[0]
-        self.data = pd.read_csv(datapath, header=[1, 2, 3], index_col=0)
+        self.data = pd.read_csv(datapath, header=[1, 2, 3], index_col=0,
+                                dtype='float32')  # TODO import maybe just the header
 
     @property
     def likelihood(self):
@@ -44,7 +45,6 @@ class Animal:
         Extract likelihood columns from self.data in np.arrays
         Args:
             self.data (pd.Dataframe): DeepLabCut output tracking data
-
         Returns:
             likelihood(np.arrays)
         """
@@ -56,12 +56,10 @@ class Animal:
         Extract tracking datas columns from self.data in np.arrays
         Args:
             self.data (pd.Dataframe): DeepLabCut output tracking data
-
         Returns:
             datatracking(np.arrays)
         """
-        columns_to_use = [x for x in self.data.columns.values if 'likelihood' not in str(x)]
-        return self.data.loc[:, columns_to_use]
+        return np.array(self.data.loc[:, [x for x in self.data.columns.values if not 'likelihood' in str(x)]])
 
 
 class Mouse(Animal):
@@ -71,11 +69,10 @@ class Mouse(Animal):
     numMouse = 0
     listMouse = []
 
-    def __init__(self, name, cage, data):
-        super.__init__(name, cage, data)
+    def __init__(self, datapath):
+        super().__init__(datapath)
         Mouse.numMouse += 1
         self.bodypart = 9
-
 
 class animalAnalyzer:  # TODO check how to manage heritance
     df_Results = pd.DataFrame()  # TODO ajouter les bonnes colonnes
@@ -89,7 +86,7 @@ class animalAnalyzer:  # TODO check how to manage heritance
     def analyse(self):
         measurement = [self.name]
         if CONFIG.analyse_distance:
-            distance_travelled = TotalDistance(CONFIG, self.trackingData, self.likelihood)
+            distance_travelled = TotalDistance(self.trackingData[:, 6:8], self.likelihood[:, 3], CONFIG.fps_camera, CONFIG.px_size)
             measurement.append(distance_travelled)
 
         if CONFIG.analyse_zone or CONFIG.analyse_entries:
@@ -108,8 +105,8 @@ if __name__ == "__main__":
     listCSV = glob.glob(os.path.join(SCRIPT_PATH, 'Datas', "*.csv"))
 
     for csv in listCSV:
-        mouse_id = f"mouse_{listCSV.index(csv)}"
-        globals()[mouse_id] = Mouse(csv.split("Datas/", 1)[1])
+        animal_id = f"animal_{listCSV.index(csv)}"
+        globals()[animal_id] = Mouse(csv.split("Datas/", 1)[1])
 
     FILE_PATH = str(sys.argv[1])
     print('\n \nData CPP Video __________________________________________________\n', animalAnalyzer.df_Results)
