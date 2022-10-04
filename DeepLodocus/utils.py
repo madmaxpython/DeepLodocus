@@ -118,8 +118,6 @@ def TotalTime(config, areas, data_reduced, likelihood, cage):
 
 
 def tkAskString(WINDOW_TITLE, GRID_TITLE):
-    root = Tk()
-    root.withdraw()
     file_path = simpledialog.askstring(WINDOW_TITLE, GRID_TITLE)
     return file_path
 
@@ -129,8 +127,8 @@ def FileSelector(TITLE, MULTIPLEFILES, FILETYPES):
     return: a list of files directory
     """
     selectwindow = Tk()
-    file_path = filedialog.askopenfilenames(title=TITLE, multiple = MULTIPLEFILES, filetypes=FILETYPES)
-    selectwindow.quit()
+    file_path = filedialog.askopenfilenames(title=TITLE, multiple = MULTIPLEFILES, filetypes=FILETYPES, parent=selectwindow)
+    selectwindow.mainloop()
     return file_path
 
 def FileSaver(TITLE, FILETYPES):
@@ -167,8 +165,10 @@ def onSelect(x):
 class dictSerializer:
     @staticmethod
     def saveJSON(config, path):
+        strconfig = json.dumps(config)
         with open(path, 'w') as file:
-            file.write(config)
+            file.write(strconfig)
+
     @staticmethod
     def loadJSON(path):
         with open(path, "r") as dictonary:
