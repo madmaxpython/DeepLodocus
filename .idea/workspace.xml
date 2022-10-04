@@ -4,21 +4,35 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a9d938f-4ce9-4b7d-874f-e1fea0042ebb" name="Changes" comment="">
+    <list default="true" id="3a9d938f-4ce9-4b7d-874f-e1fea0042ebb" name="Changes" comment="Update">
+      <change afterPath="$PROJECT_DIR$/DeepLodocus/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_calibrate.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_off.png" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/assets/button_off.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_on.png" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/assets/button_on.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_run.png" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/assets/button_run.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_save.png" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/assets/button_save.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/assets/button_selectzone.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/Output/None.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/Output/~$2data_analysis.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/ToSplit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/splitDatas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DeepLodocus/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/newmain.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/newmain.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/selectArena.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/selectArena.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DeepLodocus/zone.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/zone.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/entry_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -34,25 +48,33 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Library/Frameworks/Python.framework/Versions/3.10/bin/python3.10&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration name="GUI_DLDC" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="DeepLodocusGit" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DeepLodocus" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
@@ -68,8 +90,70 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1660605566470</updated>
+      <workItem from="1664826647678" duration="1069000" />
+      <workItem from="1664827872613" duration="544000" />
+      <workItem from="1664828655190" duration="1087000" />
+      <workItem from="1664829842250" duration="596000" />
+      <workItem from="1664831089205" duration="164000" />
+      <workItem from="1664831498830" duration="484000" />
+      <workItem from="1664832034091" duration="3846000" />
+      <workItem from="1664892028079" duration="528000" />
+      <workItem from="1664892578386" duration="2000" />
     </task>
+    <task id="LOCAL-00001" summary="use proper tk.filedialog to save output">
+      <created>1664203060567</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203060567</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Comment the code">
+      <created>1664203098420</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203098420</updated>
+    </task>
+    <task id="LOCAL-00003" summary="New main code in proper OOP way to be more flexible">
+      <created>1664203145505</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203145505</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Improve area selector&#10;Rename : calibvideo.py --&gt; selectArena.py">
+      <created>1664203221151</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203221151</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Comment the code, add dictSerializer class to import JSON as dict">
+      <created>1664203280474</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203280474</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Create a function to crop in size and length a selected video&#10;press Q to save modification&#10;press C to crop video">
+      <created>1664203342647</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1664203342647</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Update">
+      <created>1664210834470</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1664210834470</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -81,5 +165,19 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="use proper tk.filedialog to save output" />
+    <MESSAGE value="Comment the code" />
+    <MESSAGE value="New main code in proper OOP way to be more flexible" />
+    <MESSAGE value="Improve area selector&#10;Rename : calibvideo.py --&gt; selectArena.py" />
+    <MESSAGE value="Comment the code, add dictSerializer class to import JSON as dict" />
+    <MESSAGE value="Create a function to crop in size and length a selected video&#10;press Q to save modification&#10;press C to crop video" />
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$GUI_DLDC.coverage" NAME="python 3.10 Coverage Results" MODIFIED="1664828396210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$videoCrop.coverage" NAME="videoCrop Coverage Results" MODIFIED="1664827697252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
   </component>
 </project>
