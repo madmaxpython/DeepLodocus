@@ -154,7 +154,6 @@ def AreaSelector(TITLE_WINDOW, VIDEO_PATH):
     plt.show()
     return coord
 
-
 def onSelect(x):
     global coord
     if len(x) != 0:
