@@ -10,15 +10,8 @@ SCRIPT_PATH = str(Path(__file__).parent)
 
 class Config:
     def __init__(self, configfile):
-        self.fps_camera = configfile["fps_camera"]
-        self.px_size = configfile["px_size"]
-        self.path_env = configfile["path_env"]
-        self.output_excel = configfile["output_excel"]
-        self.nb_cage = configfile["nb_cage"]
-        self.zone_name = configfile["zone_name"]
-        self.analyse_distance = configfile["analyse_distance"]
-        self.analyse_zone = configfile["analyse_zone"]
-        self.analyse_entries = configfile["analyse_entrie"]
+        for key in configfile: #set attribute for every keys of the dictionary
+            setattr(self, key, configfile[key])
 
 
 class Animal:
@@ -36,8 +29,7 @@ class Animal:
     def __init__(self, datapath):
         self.name = datapath.split('_')[1].split('.')[0]
         self.cage = datapath[0]
-        self.data = pd.read_csv(datapath, header=[1, 2, 3], index_col=0,
-                                dtype='float32')  # TODO import maybe just the header
+        self.data = pd.read_csv(datapath, header=[2, 3], index_col=0)  # TODO import maybe just the header
 
     @property
     def likelihood(self):
@@ -74,6 +66,7 @@ class Mouse(Animal):
         Mouse.numMouse += 1
         self.bodypart = 9
 
+
 class animalAnalyzer:  # TODO check how to manage heritance
     df_Results = pd.DataFrame()  # TODO ajouter les bonnes colonnes
 
@@ -84,9 +77,10 @@ class animalAnalyzer:  # TODO check how to manage heritance
         self.name = animalToAnalyze.name
 
     def analyse(self):
-        measurement = [self.name]
+        measurement = [self.name] #List with animal name will be filled with measurement and add to the final output dataframe
         if CONFIG.analyse_distance:
-            distance_travelled = TotalDistance(self.trackingData[:, 6:8], self.likelihood[:, 3], CONFIG.fps_camera, CONFIG.px_size)
+            distance_travelled = TotalDistance(self.trackingData[:, 6:8], self.likelihood[:, 3], CONFIG.fps_camera,
+                                               CONFIG.px_size)
             measurement.append(distance_travelled)
 
         if CONFIG.analyse_zone or CONFIG.analyse_entries:
