@@ -1,7 +1,7 @@
 import cv2
 import datetime
 import time
-from utils import AreaSelector, FileSelector, FileSaver
+from newUtils import AreaSelector, FileSelector, FileSaver
 
 
 class videocropper:
@@ -50,7 +50,7 @@ class videocropper:
             key = cv2.waitKey(self.FPS)
             if key == ord('c'):
 
-                coord = AreaSelector("Crop your video", videopath)
+                coord = AreaSelector("Crop your video", videopath).selector()
                 x_list, y_list = [x_tuple[0] for x_tuple in coord], [y_tuple[1] for y_tuple in coord]
                 x_min, x_max, y_min, y_max = int(min(x_list)), int(max(x_list)), int(min(y_list)), int(max(y_list))
 
@@ -62,6 +62,9 @@ class videocropper:
 
                 print(f"Start at {str(datetime.timedelta(seconds=START_VIDEO / self.FPS))}")
                 print(f"End at {str(datetime.timedelta(seconds=END_VIDEO / self.FPS))}")
+                print(
+                    f"fps: {self.FPS}, lenght :{self.video_length}, width: {self.video_width}, heigh: {self.video_height}"
+                    f"exetension: {self.video_extension}")
 
                 fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
 
@@ -94,4 +97,5 @@ if __name__ == "__main__":
     file_path = FileSelector("Select video(s) to edit", True, [("Video files", ".mp4 .MOV .avi")])
 
     for file in file_path:
+        print(file)
         videocropper(file)
