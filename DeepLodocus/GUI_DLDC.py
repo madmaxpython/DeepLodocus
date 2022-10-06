@@ -35,6 +35,7 @@ def selectzone():
     os.system('python ' + OUTPUT_PATH + '/selectArena.py')
 
 
+
 def save():
     global config
 
@@ -400,7 +401,9 @@ button_10 = Button(
     image=button_image_10,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: print(""),
+    command=lambda:
+
+    os.system('python ' + OUTPUT_PATH + '/pixelCalib.py'),
     relief="flat"
 )
 button_10.place(
