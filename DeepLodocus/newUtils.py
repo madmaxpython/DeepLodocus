@@ -18,17 +18,19 @@ import cv2
 import json
 
 
-def TotalDistance(trackingData, likelihood, FPS, PIX_SIZE):
+def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
     """
     Measure the total distance travelled by the mice, using the 'spine1' label
     Parameters
     ----------
-    config: use config to know the pixel_size and the fps of the video
-    trackingData (np.array): tracking of the animal
-    likelihood (np.array ): likelihood associate with tracking datas
+    FPS: FPS of the original video
+    PIX_SIZE: size in cm of a pixel
+    trackingData: (np.array): tracking of the animal
+    likelihood: (np.array ): likelihood associate with tracking datas
 
-    Returns: Total distance travelled
+    Return:
     -------
+    tot_dist: Total distance travelled
     """
 
     temp_dist = []
@@ -61,7 +63,7 @@ def TotalDistance(trackingData, likelihood, FPS, PIX_SIZE):
     return tot_dist
 
 
-def TotalTime(config, areas, trackingData, likelihood, cage):
+def total_time(config, areas, trackingData, likelihood, cage):
     time_zone = {}
     entries_zone = {}
 
@@ -117,7 +119,7 @@ def TotalTime(config, areas, trackingData, likelihood, cage):
     return zone_dict
 
 
-class askInput:
+class AskInput:
     def __init__(self, title, prompt, typeinput):
         self.root = Tk()
         self.root.title(title)
@@ -129,12 +131,12 @@ class askInput:
         self.entry = Entry(self.root)
         self.entry.grid(row=1, column=0)
 
-        self.button = Button(self.root, text='Enter', command=self.getEntry)
+        self.button = Button(self.root, text='Enter', command=self.get_entry)
         self.button.grid(row=1, column=1)
 
         self.root.mainloop()
 
-    def getEntry(self):
+    def get_entry(self):
         try:
             value = self.convert(self.entry.get(), self.typeinput)
             self.root.quit()
@@ -143,66 +145,68 @@ class askInput:
             messagebox.showwarning('Error', f'Entry is not a {self.typeinput}')
 
     @staticmethod
-    def convert(variable, typeasked):
-        return typeasked(variable)
+    def convert(variable, type_asked):
+        return type_asked(variable)
 
-def FileSelector(TITLE, MULTIPLEFILES, FILETYPES):
+
+def file_selector(TITLE, MULTIPLE_FILES, FILETYPES):
     """
     Open a file dialog window to select files to transfer
     return: a list of files directory
     """
     selectwindow = Tk()
     selectwindow.withdraw()
-    file_path = list(filedialog.askopenfilenames(title=TITLE, multiple=MULTIPLEFILES, filetypes=FILETYPES))
+    file_path = list(filedialog.askopenfilenames(title=TITLE, multiple=MULTIPLE_FILES, filetypes=FILETYPES))
     selectwindow.destroy()
 
     return file_path
 
-def FileSaver(TITLE, FILETYPES):
+
+def file_saver(TITLE, FILETYPES):
     saver = Tk()
     file_path = filedialog.asksaveasfilename(title=TITLE, filetypes=FILETYPES)
     saver.quit()
     return file_path
 
+
 class AreaSelector:
     def __init__(self, VIDEO_PATH: str):
         self.VIDEO_PATH = VIDEO_PATH
+        self.lineprops = {'color': 'red', 'linewidth': 4, 'alpha': 0.8}
         self.point = []
 
-    def polyselector(self, TITLE_WINDOW):
+    def polygon_selector(self, TITLE_WINDOW):
         self.fig, self.ax = plt.subplots()
         self.ax.invert_yaxis()
         self.fig.canvas.manager.set_window_title('Calibration Step')
 
         self.video = cv2.VideoCapture(self.VIDEO_PATH)
-        randomnb = random.randint(0, 300)
-        self.video.set(1, randomnb)
+        random_nb = random.randint(0, 300)
+        self.video.set(1, random_nb)
         self.fig.suptitle(TITLE_WINDOW, fontsize=16)
 
         ret, frame = self.video.read()
-        imgplot = plt.imshow(frame)
-        self.lineprops = {'color': 'red', 'linewidth': 4, 'alpha': 0.8}
+        image_plot = plt.imshow(frame)
         self.point = PolygonSelector(ax=self.ax, onselect=self.onClick, lineprops=self.lineprops)
         plt.show()
 
         return self.point
 
     def onClick(self, event):
-        self.point=event
+        self.point = event
         plt.close("all")
         return self.point
 
 
-
-class dictSerializer:
+class DictSerializer:
     @staticmethod
     def saveJSON(config, path):
-        strconfig = json.dumps(config)
+        str_config = json.dumps(config)
         with open(path, 'w') as file:
-            file.write(strconfig)
+            file.write(str_config)
 
     @staticmethod
     def loadJSON(path):
-        with open(path, "r") as dictonary:
-            dictonary = json.loads(dictonary.read())
-        return dictonary
+        with open(path, "r") as dictionary:
+            dictionary = json.loads(dictionary.read())
+        return dictionary

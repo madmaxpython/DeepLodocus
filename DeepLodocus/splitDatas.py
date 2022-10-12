@@ -37,9 +37,10 @@ class mouse:
 
 
 if __name__ == '__main__':
-    CSV_TO_TREAT = FileSelector('Select data to split', True, [("*.csv")])
+    CSV_TO_TREAT = FileSelector('Select data to split', True, [("Tabular Datas", "*.csv")])
     print(CSV_TO_TREAT)
-    for file in glob.glob(os.path.join(SCRIPT_PATH, 'ToSplit', "*.csv")):
+
+    for file in CSV_TO_TREAT:
         DATA = pd.read_csv(file, index_col=0)
         NUMBER_OF_MICE = int(len(DATA.columns)/27)
         for nb_columns in range(0, 27 * NUMBER_OF_MICE):
@@ -50,7 +51,7 @@ if __name__ == '__main__':
         DATA = DATA.astype(float)
         print("csv file to split: ", file)
 
-        CALIBRATION_VIDEO = FileSelector('Select video', False, [("*")])
+        CALIBRATION_VIDEO = FileSelector('Select video', False, [("Video files", ".mp4 .MOV .avi")])[0]
 
         MiceList = []
         for zone_to_define in range(1, NUMBER_OF_MICE + 1):

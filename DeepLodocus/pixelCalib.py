@@ -3,7 +3,7 @@ import random
 from numpy import sqrt as sqrt
 from tkinter import Tk, simpledialog
 from matplotlib.widgets import PolygonSelector
-from newUtils import dictSerializer, FileSelector, askInput
+from newUtils import DictSerializer, file_selector, AskInput
 import cv2
 from matplotlib.widgets import Button
 
@@ -56,14 +56,14 @@ def ploter(filepath):
 
 if __name__ == '__main__':
 
-    coord = ploter(FileSelector('Select video to calibrate', False, [("Video files", ".mp4 .MOV .avi")])[0])
+    coord = ploter(file_selector('Select video to calibrate', False, [("Video files", ".mp4 .MOV .avi")])[0])
 
     distance_px = sqrt((coord[0][0] - coord[1][0]) ** 2 + (coord[0][1] - coord[1][1]) ** 2)
 
-    distance_cm = askInput('Calibration', 'Size in cm (use "." as decimal separator)', float).getEntry()
+    distance_cm = AskInput('Calibration', 'Size in cm (use "." as decimal separator)', float).get_entry()
 
-    config = dictSerializer.loadJSON("config.txt")
+    config = DictSerializer.loadJSON("config.txt")
 
     config["px_size"] = distance_cm / distance_px
 
-    dictSerializer.saveJSON(config, "config.txt")
+    DictSerializer.saveJSON(config, "config.txt")

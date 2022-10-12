@@ -10,11 +10,11 @@ import glob
 import json
 import os
 from pathlib import Path
-from newUtils import AreaSelector, dictSerializer
+from newUtils import AreaSelector, DictSerializer
 
 SCRIPT_PATH = str(Path(__file__).parent)
 
-config = dictSerializer.loadJSON(SCRIPT_PATH + '/config.txt')
+config = DictSerializer.loadJSON(SCRIPT_PATH + '/config.txt')
 
 VIDEO_TO_TREAT = []
 for file in glob.glob(os.path.join(SCRIPT_PATH, 'Datas', "*.mp4")):
@@ -29,11 +29,11 @@ def ZoneSelector(config, VIDEO_TO_TREAT):
     for element in VIDEO_TO_TREAT:
         video = AreaSelector(f"{SCRIPT_PATH}/Datas/{element}")
         for calibration in range(len(config['zone_name'])):
-            areas_list[f"Cage{element[0]}_Zone{config['zone_name'][calibration]}"] = video.polyselector(
+            areas_list[f"Cage{element[0]}_Zone{config['zone_name'][calibration]}"] = video.polygon_selector(
                 f"Please, define Zone {config['zone_name'][calibration]} for cage {element[0]}")
 
 
-    dictSerializer.saveJSON(areas_list, SCRIPT_PATH + '/zone.txt')
+    DictSerializer.saveJSON(areas_list, SCRIPT_PATH + '/zone.txt')
 
 
 if __name__ == "__main__":
