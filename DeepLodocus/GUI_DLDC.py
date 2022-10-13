@@ -6,11 +6,11 @@ Created on Wed Apr 27 10:39:14 2022
 @author: maximeteixeira
 """
 
-import os
+import os, glob
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
-from utils import FileSaver
+from newUtils import file_saver, DictSerializer
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -24,16 +24,25 @@ def relative_to_assets(path: str) -> Path:
 
 
 def run():
+    from newmain import Mouse, Animal, AnimalAnalyzer, data_to_csv
     save()
-    FILE_NAME = FileSaver("Select path to save output", [("Excel file", ".xlsx")])
-    os.system('python ' + OUTPUT_PATH + '/main.py ' + FILE_NAME)
+
+    file_name = file_saver("Select path to save output", [("CSV file", ".csv")])
+
+    list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
+
+    for csv in list_csv:
+        Mouse(csv)
+
+    for animal in Animal.animal_list:
+        AnimalAnalyzer(animal.name, animal.datatracking, animal.likelihood).analyse()
+
+    return data_to_csv(AnimalAnalyzer.DataFrame_Results, file_name)
 
 
 def selectzone():
-    global config
     save()
     os.system('python ' + OUTPUT_PATH + '/selectArena.py')
-
 
 
 def save():
@@ -43,22 +52,16 @@ def save():
     if ZoneName != '':
         config['zone_name'] = list(ZoneName.split(" "))
 
-    strconfig = json.dumps(config)
-
-    # Write the file out again
-    with open(OUTPUT_PATH + '/config.txt', 'w') as file:
-        file.write(strconfig)
-
-    with open(OUTPUT_PATH + '/config.txt', "r") as config:
-        config = json.loads(config.read())
+    DictSerializer.saveJSON(config, OUTPUT_PATH + '/config.txt')
 
 
 def MakeTrue(val, button):
     global config
-    if config[val] == True:
+    if config[val]:
         config[val] = False
         button.config(image=off)
-    elif config[val] == False:
+
+    elif not config[val]:
         config[val] = True
         button.config(image=on)
 
