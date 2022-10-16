@@ -24,20 +24,19 @@ def relative_to_assets(path: str) -> Path:
 
 
 def run():
-    from newmain import Mouse, Animal, AnimalAnalyzer, data_to_csv
+    from newmain import load_mice, Animal, data_to_csv
     save()
+
+    list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
+    load_mice(list_csv)
+
+    for animal in Animal.animal_list:
+        print(animal.name)
+        Animal.analyse(animal)
 
     file_name = file_saver("Select path to save output", [("CSV file", ".csv")])
 
-    list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
-
-    for csv in list_csv:
-        Mouse(csv)
-
-    for animal in Animal.animal_list:
-        AnimalAnalyzer(animal.name, animal.datatracking, animal.likelihood).analyse()
-
-    return data_to_csv(AnimalAnalyzer.DataFrame_Results, file_name)
+    return data_to_csv(Animal.DataFrame_Results, file_name)
 
 
 def selectzone():
@@ -273,17 +272,17 @@ button_zone.place(
     height=51.0
 )
 
-if config['analyse_distance']:
+if config['analyze_distance']:
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_distance']:
+elif not config['analyze_distance']:
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 button_select_distance = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_distance', button_select_distance),
+    command=lambda: MakeTrue('analyze_distance', button_select_distance),
     relief="flat"
 )
 button_select_distance.place(
@@ -293,10 +292,10 @@ button_select_distance.place(
     height=44.0
 )
 
-if config['analyse_zone']:
+if config['analyze_zone']:
     button_image_6 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_zone']:
+elif not config['analyze_zone']:
     button_image_6 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 
@@ -304,7 +303,7 @@ button_select_zone = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_zone', button_select_zone),
+    command=lambda: MakeTrue('analyze_zone', button_select_zone),
     relief="flat"
 )
 button_select_zone.place(
@@ -314,17 +313,17 @@ button_select_zone.place(
     height=44.0
 )
 
-if config['analyse_entries']:
+if config['analyze_entries']:
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_entries']:
+elif not config['analyze_entries']:
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 button_select_entries = Button(
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_entries', button_select_entries),
+    command=lambda: MakeTrue('analyze_entries', button_select_entries),
     relief="flat"
 )
 button_select_entries.place(
