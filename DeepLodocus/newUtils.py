@@ -42,15 +42,15 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
         j = 0
         while j < len(chunk):
 
-            if likelihood[j + i] < 0.8:
+            if likelihood[j + i]:
                 j += 1
 
             else:
                 if prev_x_y == 0:
 
-                    prev_x_y = tuple(chunk.iloc[j])
+                    prev_x_y = tuple(chunk[j])
                 else:
-                    curr_x_y = tuple(chunk.iloc[j])
+                    curr_x_y = tuple(chunk[j])
                     distance = sqrt((prev_x_y[0] - curr_x_y[0]) ** 2 + (prev_x_y[1] - curr_x_y[1]) ** 2)
                     if distance < 200:
                         temp_dist.append(distance * PIX_SIZE)
@@ -95,7 +95,7 @@ def total_time(config, areas, trackingData, likelihood, cage):
                 for zone in config['zone_name']:
 
                     if areas['Cage' + cage + '_' + 'Zone' + zone].contains(Point(bodypart_coord)) and (
-                            likelihood[frame + chunk_row][current_BP.index(bodypart_coord)] > 0.8):
+                            likelihood[frame + chunk_row][current_BP.index(bodypart_coord)]):
 
                         bodypart[zone + '_bp'] += 1
 
@@ -123,7 +123,7 @@ class AskInput:
     def __init__(self, title, prompt, typeinput):
         self.root = Tk()
         self.root.title(title)
-        self.typeinput = typeinput
+        self.type_input = typeinput
 
         self.prompt = Label(self.root, text=prompt)
         self.prompt.grid(row=0, column=0)
@@ -138,11 +138,11 @@ class AskInput:
 
     def get_entry(self):
         try:
-            value = self.convert(self.entry.get(), self.typeinput)
+            value = self.convert(self.entry.get(), self.type_input)
             self.root.quit()
             return value
         except:
-            messagebox.showwarning('Error', f'Entry is not a {self.typeinput}')
+            messagebox.showwarning('Error', f'Entry is not a {self.type_input}')
 
     @staticmethod
     def convert(variable, type_asked):

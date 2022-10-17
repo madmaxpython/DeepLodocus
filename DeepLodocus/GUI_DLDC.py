@@ -6,11 +6,11 @@ Created on Wed Apr 27 10:39:14 2022
 @author: maximeteixeira
 """
 
-import os
+import os, glob
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
-from utils import FileSaver
+from newUtils import file_saver, DictSerializer
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -24,16 +24,24 @@ def relative_to_assets(path: str) -> Path:
 
 
 def run():
+    from newmain import load_mice, Animal, data_to_csv
     save()
-    FILE_NAME = FileSaver("Select path to save output", [("Excel file", ".xlsx")])
-    os.system('python ' + OUTPUT_PATH + '/main.py ' + FILE_NAME)
+
+    list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
+    load_mice(list_csv)
+
+    for animal in Animal.animal_list:
+        print(animal.name)
+        Animal.analyse(animal)
+
+    file_name = file_saver("Select path to save output", [("CSV file", ".csv")])
+
+    return data_to_csv(Animal.DataFrame_Results, file_name)
 
 
 def selectzone():
-    global config
     save()
     os.system('python ' + OUTPUT_PATH + '/selectArena.py')
-
 
 
 def save():
@@ -43,22 +51,16 @@ def save():
     if ZoneName != '':
         config['zone_name'] = list(ZoneName.split(" "))
 
-    strconfig = json.dumps(config)
-
-    # Write the file out again
-    with open(OUTPUT_PATH + '/config.txt', 'w') as file:
-        file.write(strconfig)
-
-    with open(OUTPUT_PATH + '/config.txt', "r") as config:
-        config = json.loads(config.read())
+    DictSerializer.saveJSON(config, OUTPUT_PATH + '/config.txt')
 
 
 def MakeTrue(val, button):
     global config
-    if config[val] == True:
+    if config[val]:
         config[val] = False
         button.config(image=off)
-    elif config[val] == False:
+
+    elif not config[val]:
         config[val] = True
         button.config(image=on)
 
@@ -270,17 +272,17 @@ button_zone.place(
     height=51.0
 )
 
-if config['analyse_distance']:
+if config['analyze_distance']:
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_distance']:
+elif not config['analyze_distance']:
     button_image_5 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 button_select_distance = Button(
     image=button_image_5,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_distance', button_select_distance),
+    command=lambda: MakeTrue('analyze_distance', button_select_distance),
     relief="flat"
 )
 button_select_distance.place(
@@ -290,10 +292,10 @@ button_select_distance.place(
     height=44.0
 )
 
-if config['analyse_zone']:
+if config['analyze_zone']:
     button_image_6 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_zone']:
+elif not config['analyze_zone']:
     button_image_6 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 
@@ -301,7 +303,7 @@ button_select_zone = Button(
     image=button_image_6,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_zone', button_select_zone),
+    command=lambda: MakeTrue('analyze_zone', button_select_zone),
     relief="flat"
 )
 button_select_zone.place(
@@ -311,17 +313,17 @@ button_select_zone.place(
     height=44.0
 )
 
-if config['analyse_entries']:
+if config['analyze_entries']:
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_on.png"))
-elif not config['analyse_entries']:
+elif not config['analyze_entries']:
     button_image_7 = PhotoImage(
         file=relative_to_assets("button_off.png"))
 button_select_entries = Button(
     image=button_image_7,
     borderwidth=0,
     highlightthickness=0,
-    command=lambda: MakeTrue('analyse_entries', button_select_entries),
+    command=lambda: MakeTrue('analyze_entries', button_select_entries),
     relief="flat"
 )
 button_select_entries.place(

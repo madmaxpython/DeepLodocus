@@ -5,22 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3a9d938f-4ce9-4b7d-874f-e1fea0042ebb" name="Changes" comment="Update">
-      <change afterPath="$PROJECT_DIR$/DeepLodocus/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/Output/None.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/Output/~$2data_analysis.xlsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/ToSplit.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/splitDatas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/config.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/newmain.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/newmain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/selectArena.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/selectArena.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/zone.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/zone.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/entry_1.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/newUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/newUtils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +86,10 @@
       <workItem from="1664832034091" duration="3846000" />
       <workItem from="1664892028079" duration="528000" />
       <workItem from="1664892578386" duration="2000" />
+      <workItem from="1665589415277" duration="2831000" />
+      <workItem from="1665597573511" duration="4249000" />
+      <workItem from="1665603967723" duration="1177000" />
+      <workItem from="1665629687770" duration="1096000" />
     </task>
     <task id="LOCAL-00001" summary="use proper tk.filedialog to save output">
       <created>1664203060567</created>
