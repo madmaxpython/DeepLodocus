@@ -1,66 +1,76 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-
 import pandas as pd
-from shapely.geometry import Point
-from shapely.geometry.polygon import Polygon
-import glob
-import os
+from matplotlib.widgets import TextBox
+import numpy as np
 from pathlib import Path
-from tkinter import Tk, filedialog
-
-from utils import AreaSelector, tkAskString, FileSelector
+import matplotlib.pyplot as plt
+import cv2
+from newUtils import file_selector
 
 SCRIPT_PATH = str(Path(__file__).parent)
 
 
-class mouse:
-    def __init__(self, data):
-        self.data = data
-        self.meanx = self.data.iloc[:, 0].mean()
-        self.meany = self.data.iloc[:, 1].mean()
-        self.point = Point(self.data.iloc[:, 0].mean(), self.data.iloc[:, 1].mean())
-        self.WhoIsWho()
+class Mouse:
+    NB_MICE = 0
+    NB_BP = 9
+    message = "Provide the mouse ID"
 
-    def WhoIsWho(self):
-        """
-    self.point: point define by the mean coordinates of the mouse's nose
-    Go through all the zone until self.point is in zone x
-    When so, define self.identity as the mouse name associated with zone and save a csv with self.identity.csv as name
-        """
-        for x in range(1, NUMBER_OF_MICE + 1):
-            if globals()[f"zone{x}"].contains(self.point):
-                self.identity = MiceList[x - 1]
-                self.data.to_csv(f"{SCRIPT_PATH}/ToSplit/Splitted/{self.identity}.csv")
-                print(f'Mouse {x} is {MiceList[x - 1]}')
-                break
+    def __init__(self, data: pd.DataFrame, videopath):
+        self.data = data
+        self.video = videopath
+        self.data_tracking = np.array(
+            self.data.loc[3:, [x for x in self.data.columns.values if not 'likelihood' in str(x)]])
+        self.name = AnimalSelector(self.video).video_plot(self.message, self.data_tracking[60])
+        self.data.to_csv(f'Datas/{self.name}.csv')
+
+
+class Mouse_Manager:
+    def __init__(self, datapath, videocalib):
+        self.data = pd.read_csv(datapath, index_col=0, header=[2, 3])
+        self.video = videocalib
+        Mouse.NB_MICE = int(len(self.data.columns) / (Mouse.NB_BP * 3))
+        for x in range(Mouse.NB_MICE):
+            globals()[f"mouse{x + 1}"] = Mouse(self.data.iloc[:, x * 27:(1 + x) * 27], self.video)
+
+
+class AnimalSelector:
+    def __init__(self, VIDEO_PATH: str):
+        self.VIDEO_PATH = VIDEO_PATH
+        self.lineprops = {'color': 'red', 'linewidth': 4, 'alpha': 0.8}
+        self.point = []
+
+    @staticmethod
+    def submit(text):
+        plt.close("all")
+        return text
+
+    def video_plot(self, TITLE_WINDOW, data_tracking) -> str:
+        self.fig, self.ax = plt.subplots()
+        self.ax.invert_yaxis()
+        self.fig.canvas.manager.set_window_title('Calibration Step')
+        self.video = cv2.VideoCapture(self.VIDEO_PATH)
+        self.video_lenght = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
+
+        for x in range(0, 17, 2):
+            plt.plot(data_tracking[x], data_tracking[x + 1], 'ro')
+
+        self.video.set(1, 1)
+        self.fig.suptitle(TITLE_WINDOW, fontsize=16)
+
+        ret, frame = self.video.read()
+        image_plot = plt.imshow(frame)
+        axbox = plt.axes([0.1, 0.05, 0.8, 0.075])
+        text_box = TextBox(axbox, 'Name:')
+        text_box.on_submit(self.submit)
+        plt.show()
+        return text_box.text
 
 
 if __name__ == '__main__':
-    CSV_TO_TREAT = FileSelector('Select data to split', True, [("Tabular Datas", "*.csv")])
+    CSV_TO_TREAT = file_selector('Select data to split', True, [("Tabular file", "*.csv")])
     print(CSV_TO_TREAT)
 
     for file in CSV_TO_TREAT:
-        DATA = pd.read_csv(file, index_col=0)
-        NUMBER_OF_MICE = int(len(DATA.columns)/27)
-        for nb_columns in range(0, 27 * NUMBER_OF_MICE):
-            DATA.iloc[0, nb_columns] = 'Mouse 1'
-
-        DATA.columns = pd.MultiIndex.from_arrays(DATA.iloc[0:3].values)
-        DATA = DATA.iloc[3:]
-        DATA = DATA.astype(float)
         print("csv file to split: ", file)
 
-        CALIBRATION_VIDEO = FileSelector('Select video', False, [("Video files", ".mp4 .MOV .avi")])[0]
-
-        MiceList = []
-        for zone_to_define in range(1, NUMBER_OF_MICE + 1):
-            globals()[f"zone{zone_to_define}"] = Polygon(
-                AreaSelector(f'Please, define cage of Mouse {zone_to_define}', CALIBRATION_VIDEO)
-                                                        )
-            MiceList.append(tkAskString('Select your cage', f'Mouse {zone_to_define} name'))
-
-        print("List of mice: ", MiceList)
-
-        for x in range(len(MiceList)):
-            globals()[f"mouse{x + 1}"] = mouse(DATA.iloc[:, x * 27:(1 + x) * 27])
+        CALIBRATION_VIDEO = file_selector(f"Select video for {file.split('/')[-1]}", False, [("Video files", ".mp4 .MOV .avi")])[0]
+        Mouse_Manager(file, CALIBRATION_VIDEO)
