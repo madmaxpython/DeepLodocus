@@ -14,10 +14,10 @@ class Experiment:
             self,
             path_experiment: str,
             likelihood_threshold: float = 0.9,
-            iterative_imputer=True,
+            iterative_imputer: bool = True,
             table_format: str = '.csv',
             video_format: str = ".mp4"
-            ):
+    ):
 
         ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
         self.path_experiment = path_experiment
@@ -58,10 +58,10 @@ class Experiment:
                 animal.tracking_data = imputer(animal.tracking_data)
 
     def analyze(self,
-                distance=False,
-                time_zone=False,
-                entries_zone=False,
-                output_file_name=None
+                distance: bool = False,
+                time_zone: bool = False,
+                entries_zone: bool = False,
+                output_file_name: str = None
                 ):
 
         areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
@@ -93,7 +93,6 @@ class Experiment:
                                                   )
                                    )
 
-
             if time_zone or entries_zone:
                 time_zone, entries_zone = total_time(self.config,
                                                      areas_dict,
@@ -111,14 +110,12 @@ class Experiment:
 
             dataframe_output.loc[len(dataframe_output)] = measurement
 
-        if output_file_name == None:
-            output_file_name = "Analyzed_Datas"
+        print('\n \nDatas __________________________________________________\n', dataframe_output)
 
-        output_path = os.path.join(self.path_experiment, f'{output_file_name}.csv')
+        if output_file_name is None:
+            output_file_name = 'Analyzed_Datas'
 
-        print('\n \nData __________________________________________________\n', dataframe_output)
-
-        return dataframe_output.to_csv(output_path)
+        return dataframe_output.to_csv(os.path.join(self.path_experiment, f'{output_file_name}.csv'))
 
 
 class Animal:
@@ -141,11 +138,10 @@ class Animal:
         self.data = pd.read_csv(data_path, header=[2, 3], index_col=0)
 
         self.likelihood = np.array(self.data.loc[:, [x for x in self.data.columns.values if
-                                                     'likelihood' in str(x)]],
-                                   dtype='float16') > self.likelihood_threshold
+                            'likelihood' in str(x)]], dtype='float16') > self.likelihood_threshold
 
         self.tracking_data = np.array(self.data.loc[:, [x for x in self.data.columns.values if not
-        'likelihood' in str(x)]], dtype='float32')
+                                'likelihood' in str(x)]], dtype='float32')
 
 
 class Mouse(Animal):
