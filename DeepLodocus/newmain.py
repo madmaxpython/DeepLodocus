@@ -54,8 +54,8 @@ class Experiment:
         if self.enable_iterative_imputer:
             from DeepLodocus.newUtils import imputer
 
-            for mouse in self.animal_list:
-                mouse.tracking_data = imputer(mouse.tracking_data)
+            for animal in self.animal_list:
+                animal.tracking_data = imputer(animal.tracking_data)
 
     def analyze(self,
                 distance=False,
