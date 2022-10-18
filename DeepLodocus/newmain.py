@@ -1,38 +1,129 @@
 import pandas as pd
 import numpy as np
+import os
 from pathlib import Path
 from DeepLodocus.newUtils import total_time, total_distance, DictSerializer
-
-SCRIPT_PATH = str(Path(__file__).parent)
-
-
-class Config:
-    def __init__(self, configfile):
-        self.px_size = configfile['px_size']
-        self.fps_camera = configfile['fps_camera']
-        self.analyze_distance = configfile['analyze_distance']
-        self.analyze_zone = configfile['analyze_zone']
-        self.analyze_entries = configfile['analyze_entries']
-        self.zone_name = configfile['zone_name']
+import cv2
 
 
-CONFIG = Config(DictSerializer.loadJSON(SCRIPT_PATH + '/config.txt'))
+class Experiment:
+    deeplodocus_path = str(Path(__file__).parent)
+    animal_list = []
+
+    def __init__(
+            self,
+            path_experiment: str,
+            likelihood_threshold: float = 0.9,
+            iterative_imputer=True,
+            table_format: str = '.csv',
+            video_format: str = ".mp4"
+            ):
+
+        ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
+        self.path_experiment = path_experiment
+
+        self.path_csv = f'{path_experiment}/csv/'
+        self.table_format = table_format
+        self.list_csv = sorted([os.path.join(self.path_csv, i) for i in os.listdir(self.path_csv)
+                                if not i.startswith(".") and i.endswith(self.table_format)])
+
+        self.path_videos = f'{path_experiment}/videos/'
+        self.video_format = video_format
+        self.list_video = sorted([os.path.join(self.path_videos, i) for i in os.listdir(self.path_videos)
+                                  if not i.startswith(".") and i.endswith(self.video_format)])
+
+        assert len(self.list_csv) == len(self.list_video), \
+            f"Different number of tabular (n={len(self.list_csv)} files and videos (n={len(self.list_video)}"
+
+        ### ###
+        self.likelihood_threshold = likelihood_threshold
+
+        self.enable_iterative_imputer = iterative_imputer
+
+        Animal.likelihood_threshold = likelihood_threshold
+
+    @property
+    def config(self):
+        config = DictSerializer.loadJSON(self.deeplodocus_path + '/config.txt')
+        config['fps_camera'] = cv2.VideoCapture(self.list_video[0]).get(cv2.CAP_PROP_FPS)
+        return config
+
+    def load_animal(self, animal_model):
+        for csv in self.list_csv:
+            animal_model(csv)
+
+        if self.enable_iterative_imputer:
+            from DeepLodocus.newUtils import imputer
+
+            for mouse in self.animal_list:
+                mouse.tracking_data = imputer(mouse.tracking_data)
+
+    def analyze(self,
+                distance=False,
+                time_zone=False,
+                entries_zone=False,
+                output_file_name=''
+                ):
+
+        areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
+
+        ## Create the empty dataframe_output ###
+        columns = {"Animal ID": []}
+        if distance:
+            columns["Distance"] = []
+        if time_zone:
+            for zone in self.config["zone_name"].values:
+                columns[f"Time in {zone}"] = []
+
+        if entries_zone:
+            for zone in self.config["zone_name"].values:
+                columns[f"Entries in {zone}"] = []
+
+        dataframe_output = pd.DataFrame(columns)
+        ####
+
+        for animal in self.animal_list:
+
+            measurement = [animal.name]
+
+            if distance:
+                measurement.append(total_distance(animal.tracking_data[:, 6:8],
+                                                  animal.likelihood[:, 3],
+                                                  self.config['fps_camera'],
+                                                  self.config['px_size']
+                                                  )
+                                   )
 
 
-def DataFrame_factory():
-    dictio = {'Animal ID': []}
-    if CONFIG.analyze_distance:
-        dictio['Distance'] = []
-    if CONFIG.analyze_zone:
-        for zone in CONFIG.zone_name:
-            dictio['Time_' + zone] = []
-    if CONFIG.analyze_entries:
-        for zone in CONFIG.zone_name:
-            dictio['Entries_' + zone] = []
-    return pd.DataFrame(dictio)
+            if time_zone or entries_zone:
+                time_zone, entries_zone = total_time(self.config,
+                                                     areas_dict,
+                                                     animal.tracking_data,
+                                                     animal.likelihood,
+                                                     animal.cage,
+                                                     animal.body_part_nb
+                                                     )
+
+                if time_zone:
+                    measurement.append(time_zone)
+
+                if entries_zone:
+                    measurement.append(entries_zone)
+
+            dataframe_output.loc[len(dataframe_output)] = measurement
+
+        if output_file_name == '':
+            output_file_name = str(input("Please, provide a name for output file: "))
+
+        output_path = os.path.join(self.path_experiment, f'{output_file_name}.csv')
+
+        print('\n \nData __________________________________________________\n', dataframe_output)
+
+        return dataframe_output.to_csv(output_path)
 
 
 class Animal:
+    likelihood_threshold = 0.9
     """
     Create an animal from a tabular file using info in the name.
     (Created if we want to add new animal models to DeepLodocus)
@@ -43,54 +134,19 @@ class Animal:
         cage (str) : cage associate with a camera where Animal behaved
         data (pd.Dataframe) : DeepLabCut output tracking data
     """
-    animal_list = []
-    DataFrame_Results = DataFrame_factory()
 
-    def __init__(self, data_path, threshold):
+    def __init__(self, data_path):
         self.name = data_path.split('_')[1].split('.')[0]
         self.cage = data_path[0]
+
         self.data = pd.read_csv(data_path, header=[2, 3], index_col=0)
-        self.threshold = threshold
 
-    @property
-    def likelihood(self) -> np.array:
-        """
-        Extract likelihood columns from self.data in np.arrays
-        Args:
-            self.data (pd.Dataframe): DeepLabCut output tracking data
-        Returns:
-            likelihood(np.arrays)
-        """
-        return np.array(self.data.loc[:, [x for x in self.data.columns.values if 'likelihood' in str(x)]],
-                        dtype='float16') > self.threshold
+        self.likelihood = np.array(self.data.loc[:, [x for x in self.data.columns.values if
+                                                     'likelihood' in str(x)]],
+                                   dtype='float16') > self.likelihood_threshold
 
-    @property
-    def tracking_data(self) -> np.array:
-        """
-        Extract tracking datas columns from self.data in np.arrays
-        Args:
-            self.data (pd.Dataframe): DeepLabCut output tracking data
-        Returns:
-            datatracking(np.arrays)
-        """
-        return np.array(self.data.loc[:, [x for x in self.data.columns.values if not 'likelihood' in str(x)]],
-                        dtype='float32')
-
-    def analyse(self):
-        measurement = [self.name]
-        if CONFIG.analyze_distance:
-            distance_travelled = total_distance(self.tracking_data[:, 6:8], self.likelihood[:, 3], CONFIG.fps_camera,
-                                                CONFIG.px_size)
-            measurement.append(distance_travelled)
-
-        if CONFIG.analyze_zone or CONFIG.analyze_entries:
-            time_zone, entries_zone = total_time(CONFIG, AREAS, self.tracking_data, self.likelihood, self.cage)
-            if CONFIG.analyze_zone:
-                measurement.append(time_zone)
-            if CONFIG.analyze_entries:
-                measurement.append(entries_zone)
-
-        Animal.DataFrame_Results.loc[len(Animal.DataFrame_Results)] = measurement
+        self.tracking_data = np.array(self.data.loc[:, [x for x in self.data.columns.values if not
+        'likelihood' in str(x)]], dtype='float32')
 
 
 class Mouse(Animal):
@@ -98,28 +154,14 @@ class Mouse(Animal):
     Child of Animal class for Mouse
     """
     numMouse = 0
-    body_part = 9
+    body_part_nb = 9
     head = ['nose', 'leftear', 'rightear']
     body = ['spine1', 'spine2', 'spine3']
     tail = ['tailbase', 'tailmid', 'tailend']
-    body_parts = head + body + tail
+    body_parts = list(head + body + tail)
     body_sections = {'head': head, 'body': body, 'tail': tail}
 
-    def __init__(self, data_path, threshold=0.9):
-        super().__init__(data_path, threshold)
+    def __init__(self, data_path):
+        super().__init__(data_path)
         Mouse.numMouse += 1
-        Animal.animal_list.append(self)
-
-
-def load_mice(list_csv: list, threshold: int = 0.9):
-    for csv in list_csv:
-        Mouse(csv, threshold)
-
-
-def data_to_csv(dataframe: pd.DataFrame, FILE_PATH):
-    print('\n \nData __________________________________________________\n', dataframe)
-    return dataframe.to_csv(FILE_PATH)
-
-
-AREAS = DictSerializer.loadJSON(SCRIPT_PATH + "/zone.txt")
-
+        Experiment.animal_list.append(self)
