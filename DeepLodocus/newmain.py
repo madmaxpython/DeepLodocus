@@ -36,7 +36,6 @@ class Experiment:
             f"Different number of tabular (n={len(self.list_csv)} files and videos (n={len(self.list_video)}"
 
         ### ###
-        self.likelihood_threshold = likelihood_threshold
 
         self.enable_iterative_imputer = iterative_imputer
 
