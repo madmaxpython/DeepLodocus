@@ -61,7 +61,7 @@ class Experiment:
                 distance=False,
                 time_zone=False,
                 entries_zone=False,
-                output_file_name=''
+                output_file_name=None
                 ):
 
         areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
@@ -111,8 +111,8 @@ class Experiment:
 
             dataframe_output.loc[len(dataframe_output)] = measurement
 
-        if output_file_name == '':
-            output_file_name = str(input("Please, provide a name for output file: "))
+        if output_file_name == None:
+            output_file_name = "Analyzed_Datas"
 
         output_path = os.path.join(self.path_experiment, f'{output_file_name}.csv')
 
