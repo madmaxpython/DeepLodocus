@@ -1,1 +1,1 @@
-{"fps_camera": 24, "px_size": 0.046181779982066316, "path_env": "", "output_excel": "output", "nb_cage": 4, "zone_name": ["lines", "dots"], "analyse_distance": true, "analyse_zone": false, "analyse_entries": false}
+{"px_size":None, "zone_name": []}
