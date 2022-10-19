@@ -160,3 +160,5 @@ class Mouse(Animal):
         super().__init__(data_path)
         Mouse.numMouse += 1
         Experiment.animal_list.append(self)
+
+print('finally we are going to work on the same fucking thing')
