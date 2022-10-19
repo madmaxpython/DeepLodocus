@@ -1,121 +1,165 @@
-"""
-Created on Wed Apr 27 10:39:14 2022
-
-@author: maximeteixeira
-"""
-
-import glob, os, sys
 import pandas as pd
 import numpy as np
-from utils import TotalTime, TotalDistance, FileSaver
-from shapely.geometry.polygon import Polygon
-import json
+import os
 from pathlib import Path
-
-SCRIPT_PATH = str(Path(__file__).parent)
-
-# Import config dictionary from a .txt file
-with open(SCRIPT_PATH + '/config.txt', "r") as config_file:
-    config = json.loads(config_file.read())
+from DeepLodocus.Utils import total_time, total_distance, DictSerializer
+import cv2
 
 
-class Mouse():
-    num_of_mice = 0
+class Experiment:
+    deeplodocus_path = str(Path(__file__).parent)
+    animal_list = []
 
-    def __init__(self, csvname):
-        Mouse.num_of_mice += 1
+    def __init__(
+            self,
+            path_experiment: str,
+            likelihood_threshold: float = 0.9,
+            iterative_imputer: bool = True,
+            table_format: str = '.csvfiles',
+            video_format: str = ".mp4"
+            ):
 
-        self.csvname = csvname
-        self.cage = csvname[0]
-        self.name = csvname.split('_')[1].split('.')[0]
-        self.data = pd.read_csv(SCRIPT_PATH + '/Datas/' + self.csvname, header=[1, 2, 3], index_col=0)
-        # Create an numpy array of likelihood value
-        self.likelihood = np.array(self.data.loc[:, [x for x in self.data.columns.values if 'likelihood' in str(x)]])
-        # Create a dataframe without likelihood columns
-        columns_to_use = [x for x in self.data.columns.values if 'likelihood' not in str(x)]
-        self.data_reduced = self.data.loc[:, columns_to_use]
+        ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
+        self.path_experiment = path_experiment
 
-    def analyze_zone(self):
-        """
-            #Create a Shapely Polygon-object for each zone define by the user
-            Polygon object have has the attribute ".contain" to check if a point is in this Polygon
-            We will use this attribute to see if mice is in zone
+        self.path_csv = f'{path_experiment}/csvfiles/'
+        self.table_format = table_format
+        self.list_csv = sorted([os.path.join(self.path_csv, i) for i in os.listdir(self.path_csv)
+                                if not i.startswith(".") and i.endswith(self.table_format)])
 
-            #Call the function analysis.TotalTime, that measure time and nb of entries in zone for each zone
-            Output -> dictionary 'output_zone' with 'time_zone' and 'entries_zone' as key, saved in self.time_zone and
-            self.entries_zone respectively
-        """
-        with open(SCRIPT_PATH + "/zone.txt", "r") as zone_file:
-            areas = json.loads(zone_file.read())
+        self.path_videos = f'{path_experiment}/videos/'
+        self.video_format = video_format
+        self.list_video = sorted([os.path.join(self.path_videos, i) for i in os.listdir(self.path_videos)
+                                  if not i.startswith(".") and i.endswith(self.video_format)])
 
-        for zone in areas:
-            areas[zone] = Polygon(areas[zone])
+        try:
+            len(self.list_csv) == len(self.list_video)
+        except:
+            print(f"Different number of tabular (n={len(self.list_csv)} files and videos (n={len(self.list_video)}")
 
-        output_zone = TotalTime(config, areas, self.data_reduced, self.likelihood, self.cage)
-        self.time_zone = output_zone['time_zone']
-        self.entries_zone = output_zone['entries_zone']
+        ### ###
 
-    def analyze_distance(self):
-        """
-            Measure the total distance travelled by the mice during the session
-            Output -> the distance travelled, save in self.distance_travelled
-        """
-        self.distance_travelled = TotalDistance(config, self.data_reduced, self.likelihood)
+        self.enable_iterative_imputer = iterative_imputer
+
+        Animal.likelihood_threshold = likelihood_threshold
+
+    @property
+    def config(self):
+        config = DictSerializer.loadJSON(self.deeplodocus_path + '/config.txt')
+        config['fps_camera'] = cv2.VideoCapture(self.list_video[0]).get(cv2.CAP_PROP_FPS)
+        return config
+
+    def load_animal(self, animal_model):
+        for csv in self.list_csv:
+            animal_model(csv)
+
+        if self.enable_iterative_imputer:
+            from DeepLodocus.Utils import it_imputer
+
+            for animal in self.animal_list:
+                animal.tracking_data = it_imputer(animal.tracking_data)
+
+    def analyze(self,
+                distance: bool = False,
+                time_zone: bool = False,
+                entries_zone: bool = False,
+                output_file_name: str = None
+                ):
+
+        areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
+
+        ## Create the empty dataframe_output ###
+        columns = {"Animal ID": []}
+        if distance:
+            columns["Distance"] = []
+        if time_zone:
+            for zone in self.config["zone_name"].values:
+                columns[f"Time in {zone}"] = []
+
+        if entries_zone:
+            for zone in self.config["zone_name"].values:
+                columns[f"Entries in {zone}"] = []
+
+        dataframe_output = pd.DataFrame(columns)
+        ####
+
+        for animal in self.animal_list:
+
+            measurement = [animal.name]
+
+            if distance:
+                measurement.append(total_distance(animal.tracking_data[:, 6:8],
+                                                  animal.likelihood[:, 3],
+                                                  self.config['fps_camera'],
+                                                  self.config['px_size']
+                                                  )
+                                   )
+
+            if time_zone or entries_zone:
+                time_zone, entries_zone = total_time(self.config,
+                                                     areas_dict,
+                                                     animal.tracking_data,
+                                                     animal.likelihood,
+                                                     animal.cage,
+                                                     animal.body_part_nb
+                                                     )
+
+                if time_zone:
+                    measurement.append(time_zone)
+
+                if entries_zone:
+                    measurement.append(entries_zone)
+
+            dataframe_output.loc[len(dataframe_output)] = measurement
+
+        print('\n \nDatas __________________________________________________\n', dataframe_output)
+
+        if output_file_name is None:
+            output_file_name = 'Analyzed_Datas'
+
+        return dataframe_output.to_csv(os.path.join(self.path_experiment, f'{output_file_name}.csvfiles'))
 
 
-if __name__ == "__main__":
-    # Create an empty dataframe that will be filed by analyze for each mouse (distance travelled, time & entries in zone)
-    df_analysis = pd.DataFrame()
+class Animal:
+    likelihood_threshold = 0.9
+    """
+    Create an animal from a tabular file using info in the name.
+    (Created if we want to add new animal models to DeepLodocus)
+    Args:
+        data_path (str): path of the tabular file
+    self:
+        name (str) : experimental name of the animal
+        cage (str) : cage associate with a camera where Animal behaved
+        data (pd.Dataframe) : DeepLabCut output tracking data
+    """
 
-    # Look for csv files, and create an instance Mouse for each of them
-    for file in glob.glob(os.path.join(SCRIPT_PATH, 'Datas', "*.csv")):
-        mouse_id = glob.glob(os.path.join(SCRIPT_PATH, 'Datas', "*.csv")).index(file)
-        globals()[f"mouse_{mouse_id}"] = Mouse(file.split("Datas/", 1)[1])
-        df_analysis[globals()[f"mouse_{mouse_id}"].name] = 0
+    def __init__(self, data_path):
+        self.name = data_path.split('_')[1].split('.')[0]
+        self.cage = data_path[0]
+
+        self.data = pd.read_csv(data_path, header=[2, 3], index_col=0)
+
+        self.likelihood = np.array(self.data.loc[:, [x for x in self.data.columns.values if
+                                                     'likelihood' in str(x)]],
+                                   dtype='float16') > self.likelihood_threshold
+
+        self.tracking_data = np.array(self.data.loc[:, [x for x in self.data.columns.values if not
+        'likelihood' in str(x)]], dtype='float32')
 
 
-########The following list will be used to fill df_analyze dataframe
+class Mouse(Animal):
+    """
+    Child of Animal class for Mouse
+    """
+    numMouse = 0
+    body_part_nb = 9
+    head = ['nose', 'leftear', 'rightear']
+    body = ['spine1', 'spine2', 'spine3']
+    tail = ['tailbase', 'tailmid', 'tailend']
+    body_parts = list(head + body + tail)
+    body_sections = {'head': head, 'body': body, 'tail': tail}
 
-    # If time or entries in zones need to be analyze, create a list for each of them
-    if config['analyse_zone'] == True or config['analyse_entries'] == True:
-        for zone in config['zone_name']:
-            globals()[f"list_time_{zone}"] = []
-            globals()[f"list_entries_{zone}"] = []
-
-    # If distance travelled need to be analyzed, create a list
-    if config['analyse_distance']:
-        list_distance = []
-
-    # For each measure, fill the list create above with measure
-    for mice_nb in range(Mouse.num_of_mice):
-        if config['analyse_zone'] or config['analyse_entries']:
-
-            globals()[f"mouse_{mice_nb}"].analyze_zone()
-
-            for zone in config['zone_name']:
-
-                if config['analyse_zone']:
-                    globals()[f"list_time_{zone}"].append(globals()[f"mouse_{mice_nb}"].time_zone[zone])
-
-                if config['analyse_entries']:
-                    globals()[f"list_entries_{zone}"].append(globals()[f"mouse_{mice_nb}"].entries_zone[zone])
-
-                # If it is the last mouse, create a row in dataframe made of the list of this measure
-                if mice_nb == Mouse.num_of_mice - 1:
-                    if config['analyse_zone']:
-                        df_analysis.loc['Time in zone ' + zone + ' (sec)'] = globals()[f"list_time_{zone}"]
-
-                    if config['analyse_entries']:
-                        df_analysis.loc['Entries in ' + zone] = globals()[f"list_entries_{zone}"]
-
-        if config['analyse_distance']:
-            globals()[f"mouse_{mice_nb}"].analyze_distance()
-            list_distance.append(globals()[f"mouse_{mice_nb}"].distance_travelled)
-            # If it is the last mouse, create a row in dataframe made of the list of this measure
-            if mice_nb == Mouse.num_of_mice - 1:
-                df_analysis.loc['Distance travelled (cm)'] = list_distance
-
-    FILE_PATH = str(sys.argv[1])
-    print('\n \nData CPP Video __________________________________________________\n', df_analysis)
-    df_analysis.to_excel(FILE_PATH
-                         )
+    def __init__(self, data_path):
+        super().__init__(data_path)
+        Mouse.numMouse += 1
+        Experiment.animal_list.append(self)

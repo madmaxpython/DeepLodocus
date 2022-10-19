@@ -1,7 +1,7 @@
 import cv2
 import datetime
 import time
-from newUtils import AreaSelector, file_selector, file_saver
+from Utils import AreaSelector, file_selector, file_saver
 
 
 class videocropper:

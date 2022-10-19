@@ -3,7 +3,7 @@ import random
 from numpy import sqrt as sqrt
 from tkinter import Tk, simpledialog
 from matplotlib.widgets import PolygonSelector
-from newUtils import DictSerializer, file_selector, AskInput
+from Utils import DictSerializer, file_selector, AskInput
 import cv2
 from matplotlib.widgets import Button
 
@@ -38,11 +38,10 @@ def ploter(filepath):
     fig, ax = plt.subplots()
     ax.invert_yaxis()
     fig.canvas.manager.set_window_title('Calibration Step')
-
     video = cv2.VideoCapture(filepath)
     randomnb = random.randint(0, int(video.get(cv2.CAP_PROP_FRAME_COUNT)))
     video.set(1, randomnb)
-    fig.suptitle('Calibration', fontsize=16)
+    fig.suptitle('Select 2 points with a known distance', fontsize=16)
 
     ret, frame = video.read()
     imgplot = plt.imshow(frame)
@@ -56,7 +55,7 @@ def ploter(filepath):
 
 if __name__ == '__main__':
 
-    coord = ploter(file_selector('Select video to calibrate', False, [("Video files", ".mp4 .MOV .avi")])[0])
+    coord = ploter(file_selector('Select video to calibrate', False, [("Video files", ".mp4 .avi")])[0])
 
     distance_px = sqrt((coord[0][0] - coord[1][0]) ** 2 + (coord[0][1] - coord[1][1]) ** 2)
 

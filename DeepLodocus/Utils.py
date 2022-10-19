@@ -214,6 +214,7 @@ class DictSerializer:
             dictionary = json.loads(dictionary.read())
         return dictionary
 
-def imputer(data):
+
+def it_imputer(data):
     imput_it = IterativeImputer(missing_values=np.nan, tol=0.001, max_iter=10)
     return imput_it.fit_transform(data)

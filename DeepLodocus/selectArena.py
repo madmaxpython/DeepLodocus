@@ -10,7 +10,7 @@ import glob
 import json
 import os
 from pathlib import Path
-from newUtils import AreaSelector, DictSerializer
+from Utils import AreaSelector, DictSerializer
 
 SCRIPT_PATH = str(Path(__file__).parent)
 

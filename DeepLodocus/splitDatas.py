@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 import cv2
-from newUtils import file_selector
+from Utils import file_selector
 
 SCRIPT_PATH = str(Path(__file__).parent)
 
@@ -20,7 +20,7 @@ class Mouse:
         self.data_tracking = np.array(
             self.data.loc[3:, [x for x in self.data.columns.values if not 'likelihood' in str(x)]])
         self.name = AnimalSelector(self.video).video_plot(self.message, self.data_tracking[60])
-        self.data.to_csv(f'Datas/{self.name}.csv')
+        self.data.to_csv(f'Datas/{self.name}.csvfiles')
 
 
 class Mouse_Manager:
@@ -66,11 +66,11 @@ class AnimalSelector:
 
 
 if __name__ == '__main__':
-    CSV_TO_TREAT = file_selector('Select data to split', True, [("Tabular file", "*.csv")])
+    CSV_TO_TREAT = file_selector('Select data to split', True, [("Tabular file", "*.csvfiles")])
     print(CSV_TO_TREAT)
 
     for file in CSV_TO_TREAT:
-        print("csv file to split: ", file)
+        print("csvfiles file to split: ", file)
 
         CALIBRATION_VIDEO = file_selector(f"Select video for {file.split('/')[-1]}", False, [("Video files", ".mp4 .MOV .avi")])[0]
         Mouse_Manager(file, CALIBRATION_VIDEO)
