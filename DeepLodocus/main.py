@@ -62,8 +62,7 @@ class Experiment:
     def analyze(self,
                 distance: bool = False,
                 time_zone: bool = False,
-                entries_zone: bool = False,
-                output_file_name: str = None
+                entries_zone: bool = False
                 ):
 
         areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
@@ -114,10 +113,7 @@ class Experiment:
 
         print('\n \nDatas __________________________________________________\n', dataframe_output)
 
-        if output_file_name is None:
-            output_file_name = 'Analyzed_Datas'
-
-        return dataframe_output.to_csv(os.path.join(self.path_experiment, f'{output_file_name}.csvfiles'))
+        return dataframe_output
 
 
 class Animal:
