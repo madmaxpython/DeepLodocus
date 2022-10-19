@@ -14,6 +14,8 @@ from matplotlib.widgets import PolygonSelector
 from shapely.geometry import Point
 from tkinter import *
 from tkinter import messagebox, filedialog
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
 import cv2
 import json
 
@@ -36,6 +38,7 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
     temp_dist = []
     chunk_size = int(FPS / 4)
     prev_x_y = 0
+
     for i in range(0, len(trackingData) - 10, chunk_size):
         chunk = trackingData[i:i + chunk_size]
 
@@ -58,12 +61,12 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
                         temp_dist.append(0)
                     prev_x_y = curr_x_y
                 j += chunk_size + 1
-
+    std_dev = np.std(temp_dist)
     tot_dist = np.nansum(temp_dist)
     return tot_dist
 
 
-def total_time(config, areas, trackingData, likelihood, cage):
+def total_time(config, areas, trackingData, likelihood, cage, bodypart_nb):
     time_zone = {}
     entries_zone = {}
 
@@ -210,3 +213,7 @@ class DictSerializer:
         with open(path, "r") as dictionary:
             dictionary = json.loads(dictionary.read())
         return dictionary
+
+def imputer(data):
+    imput_it = IterativeImputer(missing_values=np.nan, tol=0.001, max_iter=10)
+    return imput_it.fit_transform(data)
