@@ -2,7 +2,8 @@ import pandas as pd
 import numpy as np
 import os
 from pathlib import Path
-from DeepLodocus.newUtils import total_time, total_distance, DictSerializer
+import DeepLodocus.DeepLodocus as DeepL
+from DeepLodocus.DeepLodocus.newUtils import total_time, total_distance, DictSerializer
 import cv2
 
 
@@ -22,7 +23,7 @@ class Experiment:
         ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
         self.path_experiment = path_experiment
 
-        self.path_csv = f'{path_experiment}/csv/'
+        self.path_csv = f'{path_experiment}/csvfiles/'
         self.table_format = table_format
         self.list_csv = sorted([os.path.join(self.path_csv, i) for i in os.listdir(self.path_csv)
                                 if not i.startswith(".") and i.endswith(self.table_format)])
@@ -52,7 +53,7 @@ class Experiment:
             animal_model(csv)
 
         if self.enable_iterative_imputer:
-            from DeepLodocus.newUtils import imputer
+            from DeepL.newUtils import imputer
 
             for animal in self.animal_list:
                 animal.tracking_data = imputer(animal.tracking_data)
@@ -119,7 +120,6 @@ class Experiment:
 
 
 class Animal:
-    likelihood_threshold = 0.9
     """
     Create an animal from a tabular file using info in the name.
     (Created if we want to add new animal models to DeepLodocus)
@@ -160,5 +160,3 @@ class Mouse(Animal):
         super().__init__(data_path)
         Mouse.numMouse += 1
         Experiment.animal_list.append(self)
-
-print('finally we are going to work on the same fucking thing')
