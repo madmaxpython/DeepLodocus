@@ -7,6 +7,36 @@ import cv2
 
 
 class Experiment:
+    """
+    Experiment class that allows to load and process and analyze DeepLabCut (DLC) output tabular files
+    class arguments
+    ----------
+    path_experiment: str -> path to the folder containing the csv and video output from DLC organized as :
+
+                    folder
+                        L---->csvfiles: folder -> contains the csv files output from DLC
+                        L---->videos: folder -> contains the videos files output from DLC
+
+    likelihood_threshold: float -> threshold above which likelihood is considered as acceptable
+    enable_iterative_imputer: bool -> data to be proceeded (or not) by sklearn.impute.IterativeImputer
+    table_format: str -> extension of the tabular file
+    video_format: str -> extension of the video file
+
+    class attribute
+    P.S.: I didn't put redundant arguments (i.e. self.path_experiment = path_experiment)
+    ---------
+    animal_list: list[object] -> list of Animal instances
+    path_csv, path_video: str -> absolute path to the csv/video sub-folders
+    list_csv, list_video: list[str] -> absolute path to all the csv/video to be treated
+    config: dict -> dictionary of parameters of the experiment, contains in the txt file 'config.txt'
+                - px_size: float -> size of a single pixel in videos (calibrated by the pixelCalib.py script)
+                - zone_name: list[str] -> list of the zone name defined by the user
+
+    class methods
+    ---------
+    load_animal: create an instance of the desired Animal class for every csv in list_csv
+    analyze: analyze every animal contained in animal_list
+    """
     deeplodocus_path = str(Path(__file__).parent)
     animal_list = []
 
@@ -14,10 +44,10 @@ class Experiment:
             self,
             path_experiment: str,
             likelihood_threshold: float = 0.9,
-            iterative_imputer: bool = True,
-            table_format: str = '.csvfiles',
+            enable_iterative_imputer: bool = True,
+            table_format: str = '.csv',
             video_format: str = ".mp4"
-            ):
+    ):
 
         ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
         self.path_experiment = path_experiment
@@ -37,9 +67,9 @@ class Experiment:
         except:
             print(f"Different number of tabular (n={len(self.list_csv)} files and videos (n={len(self.list_video)}")
 
-        ### ###
+        ######
 
-        self.enable_iterative_imputer = iterative_imputer
+        self.enable_iterative_imputer = enable_iterative_imputer
 
         Animal.likelihood_threshold = likelihood_threshold
 
@@ -50,13 +80,19 @@ class Experiment:
         return config
 
     def load_animal(self, animal_model):
+        """
+        Create an instance of the desired Animal child-class for every csv in list_csv,
+            and pre-process the data if desired
+        Parameter:
+        ----------
+        animal_data: class -> desired Animal child-class
+        """
         for csv in self.list_csv:
             animal_model(csv)
 
-        if self.enable_iterative_imputer:
-            from DeepLodocus.Utils import it_imputer
-
-            for animal in self.animal_list:
+        for animal in self.animal_list:
+            if self.enable_iterative_imputer:
+                from DeepLodocus.Utils import it_imputer
                 animal.tracking_data = it_imputer(animal.tracking_data)
 
     def analyze(self,
@@ -94,7 +130,7 @@ class Experiment:
                                                   )
                                    )
 
-            if time_zone or entries_zone:
+            if time_zone or entries_zone:  # TODO the total_time function is obsolete, needed to be update
                 time_zone, entries_zone = total_time(self.config,
                                                      areas_dict,
                                                      animal.tracking_data,
@@ -131,7 +167,7 @@ class Animal:
 
     def __init__(self, data_path):
         self.name = data_path.split('_')[1].split('.')[0]
-        self.cage = data_path[0]
+        self.cage = data_path.split('/')[-1][0]
 
         self.data = pd.read_csv(data_path, header=[2, 3], index_col=0)
 
@@ -157,5 +193,12 @@ class Mouse(Animal):
 
     def __init__(self, data_path):
         super().__init__(data_path)
+        self.data_path = data_path
         Mouse.numMouse += 1
         Experiment.animal_list.append(self)
+
+    def __str__(self):
+        return f"Mouse {self.name} in cage {self.cage}"
+
+    def __repr__(self):
+        return f"Mouse({self.data_path})"
