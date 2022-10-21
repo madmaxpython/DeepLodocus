@@ -25,14 +25,14 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
     Measure the total distance travelled by the mice, using the 'spine1' label
     Parameters
     ----------
-    FPS: FPS of the original video
-    PIX_SIZE: size in cm of a pixel
-    trackingData: (np.array): tracking of the animal
-    likelihood: (np.array ): likelihood associate with tracking datas
+    FPS: float -> FPS of the original video
+    PIX_SIZE: float -> size in cm of a pixel
+    trackingData: np.array -> tracking datas of the animal
+    likelihood: np.array -> likelihood associate with tracking datas
 
     Return:
     -------
-    tot_dist: Total distance travelled
+    tot_dist: float -> Total distance travelled in cm
     """
 
     temp_dist = []
@@ -66,7 +66,22 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
     return tot_dist
 
 
-def total_time(config, areas, trackingData, likelihood, cage, bodypart_nb):
+def total_time(config, areas, trackingData, likelihood, cage):
+    # TODO: To be adapted to the new main.py organization, is not working now
+    """
+     Measure the total time and entries spent by the mice in defined zon
+     Parameters
+     ----------
+     FPS: float -> FPS of the original video
+     PIX_SIZE: float -> size in cm of a pixel
+     trackingData: np.array -> tracking of the animal
+     likelihood: np.array -> likelihood associate with tracking datas
+
+     Return:
+     -------
+     zone_dict: dictionary -> Time and entries in the different zones
+     """
+
     time_zone = {}
     entries_zone = {}
 
@@ -123,6 +138,25 @@ def total_time(config, areas, trackingData, likelihood, cage, bodypart_nb):
 
 
 class AskInput:
+    """
+     Open a window to ask specific type (str, int, float...) input from the user
+     Parameters
+     ----------
+     title: str -> Title of the window
+     prompt: str -> Short text to describe the asked input
+     typeinput: type -> Type of input asked (str, int, float...)
+
+     class_method:
+     -------
+     get_entry: get the input
+     convert: convert the user input in the desired type
+
+     Return:
+     -------
+     value: input from the user
+
+     """
+
     def __init__(self, title, prompt, typeinput):
         self.root = Tk()
         self.root.title(title)
@@ -154,8 +188,16 @@ class AskInput:
 
 def file_selector(TITLE, MULTIPLE_FILES, FILETYPES):
     """
-    Open a file dialog window to select files to transfer
-    return: a list of files directory
+    Open a file dialog window to select file(s)
+    Parameters
+    ----------
+    TITLE: str -> Title of the window
+    MULTIPLE_FILES: bool -> enable to select multiple files
+    filetypes: list[tuple] -> file type asked with the following format: [("Type of file","extension(s)")]
+                              ex: [("Video files", ".mp4 .MOV .avi"), ("All", "*")]
+    Return
+    ----------
+    file_path: list[str] -> list string of the selected files path
     """
     selectwindow = Tk()
     selectwindow.withdraw()
@@ -173,6 +215,24 @@ def file_saver(TITLE, FILETYPES):
 
 
 class AreaSelector:
+    """
+    Open a matplotlib.fig, with a frame of a desired video as background.
+    Allows the user to select a desired zone in shape of a polygon
+    PS: You have to run the whole class again for a new zone
+
+    Parameters
+    ----------
+    VIDEO_PATH: str -> Path to the video to use as background
+    class_methods
+    ----------
+    polygon : Open a matplotlib.fig, with a frame of a desired video as background
+    onClick: Function called when the polygon is completed: close the whole window and return the coordinates
+            of the polygon
+    Return
+    ----------
+    self.point: list[tuple]-> list of coordinates (x,y) of the polygon
+    """
+
     def __init__(self, VIDEO_PATH: str):
         self.VIDEO_PATH = VIDEO_PATH
         self.lineprops = {'color': 'red', 'linewidth': 4, 'alpha': 0.8}
@@ -215,6 +275,16 @@ class DictSerializer:
         return dictionary
 
 
-def it_imputer(data):
-    imput_it = IterativeImputer(missing_values=np.nan, tol=0.001, max_iter=10)
-    return imput_it.fit_transform(data)
+def it_imputer(data, tol=0.01, max_iter=10):
+    """
+    Very simple function to use the sklearn.impute.IterativeImputer
+    Parameters
+    ---------
+    data: np.array -> Data to be treated
+    tol: float -> tolerance threshold to be reached
+    max_iter: int -> max number of iterations to be executed
+    Returns
+    ---------
+    -> np.array : processed data by the sklearn.impute.IterativeImputer
+    """
+    return IterativeImputer(missing_values=np.nan, tol=tol, max_iter=max_iter).fit_transform(data)
