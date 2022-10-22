@@ -73,6 +73,8 @@ class Experiment:
 
         Animal.likelihood_threshold = likelihood_threshold
 
+        print('You have created an experiment')
+        print("Use the '.load_animal' function to load datas\n")
     @property
     def config(self):
         config = DictSerializer.loadJSON(self.deeplodocus_path + '/config.txt')
@@ -87,6 +89,7 @@ class Experiment:
         ----------
         animal_data: class -> desired Animal child-class
         """
+        print("Loading the datas...")
         for csv in self.list_csv:
             animal_model(csv)
 
@@ -94,6 +97,9 @@ class Experiment:
             if self.enable_iterative_imputer:
                 from DeepLodocus.Utils import it_imputer
                 animal.tracking_data = it_imputer(animal.tracking_data)
+
+        print("Datas loaded")
+        print("You can now use the '.analyze' function to process the data")
 
     def analyze(self,
                 distance: bool = False,
@@ -196,6 +202,7 @@ class Mouse(Animal):
         self.data_path = data_path
         Mouse.numMouse += 1
         Experiment.animal_list.append(self)
+        print(f'Mouse {self.name} created')
 
     def __str__(self):
         return f"Mouse {self.name} in cage {self.cage}"
