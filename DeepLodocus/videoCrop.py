@@ -13,6 +13,7 @@ class videocropper:
 
     def __init__(self, videopath):
 
+
         self.video = cv2.VideoCapture(videopath)
         self.video_extension = videopath.split(".")[-1]
         self.video_length = int(self.video.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -62,14 +63,15 @@ class videocropper:
 
                 print(f"Start at {str(datetime.timedelta(seconds=START_VIDEO / self.FPS))}")
                 print(f"End at {str(datetime.timedelta(seconds=END_VIDEO / self.FPS))}")
+                fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
-                fourcc = cv2.VideoWriter_fourcc('m', 'p', '4', 'v')
+                #output_name = file_saver("Select where to save video", [("Video files", ".mp4")])
 
-                writer = cv2.VideoWriter(
-                    file_saver("Select where to save video", [("Video files", "." + self.video_extension)]), fourcc, self.FPS,
+                writer = cv2.VideoWriter('testimputer.mp4', fourcc, self.FPS,
                     (self.video_width, self.video_height))
 
                 start_time = time.time()
+                print(START_VIDEO, END_VIDEO)
                 for i in range(START_VIDEO, END_VIDEO):
                     ret, frame = self.video.read()
                     if ret:
