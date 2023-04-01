@@ -4,10 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3a9d938f-4ce9-4b7d-874f-e1fea0042ebb" name="Changes" comment="Update">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="968f8155-6503-45d0-9c1a-9b5d1b8afdc5" name="Changes" comment="Add verbose">
+      <change afterPath="$PROJECT_DIR$/DeepLodocus/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/DeepLodocusGit.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/other.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/newUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/newUtils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/Utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/Utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/config.txt" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/config.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/multiplePolygon.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/multiplePolygon.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/selectArena.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/selectArena.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Docs/config.yaml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +30,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="Jupyter Notebook" />
       </list>
     </option>
   </component>
@@ -27,8 +40,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2DPfJ7mksX14vns1UqxuneKOiCx" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2GMIpQWEF6J8VjcZpiJcvxRoUPK" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
+    <option name="autoscrollFromSource" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
@@ -37,16 +55,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Library/Frameworks/Python.framework/Versions/3.10/bin/python3.10&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;debugger.dataViews.python.type.renderers&quot;
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+    <configuration name="saveimp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DeepLodocusGit" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -54,93 +71,139 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DeepLodocus" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DeepLodocus/saveimp.py" />
       <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
       <option name="REDIRECT_INPUT" value="false" />
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="videoCrop" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
+      <module name="DeepLodocusGit" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="$PROJECT_DIR$/venv/bin/python" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/DeepLodocus" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/DeepLodocus/videoCrop.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.saveimp" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="3a9d938f-4ce9-4b7d-874f-e1fea0042ebb" name="Changes" comment="" />
-      <created>1660605566470</created>
+      <changelist id="968f8155-6503-45d0-9c1a-9b5d1b8afdc5" name="Changes" comment="" />
+      <created>1666192208213</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1660605566470</updated>
-      <workItem from="1664826647678" duration="1069000" />
-      <workItem from="1664827872613" duration="544000" />
-      <workItem from="1664828655190" duration="1087000" />
-      <workItem from="1664829842250" duration="596000" />
-      <workItem from="1664831089205" duration="164000" />
-      <workItem from="1664831498830" duration="484000" />
-      <workItem from="1664832034091" duration="3846000" />
-      <workItem from="1664892028079" duration="528000" />
-      <workItem from="1664892578386" duration="2000" />
-      <workItem from="1665589415277" duration="2831000" />
-      <workItem from="1665597573511" duration="4249000" />
-      <workItem from="1665603967723" duration="1177000" />
-      <workItem from="1665629687770" duration="1096000" />
+      <updated>1666192208213</updated>
+      <workItem from="1666192211119" duration="520000" />
+      <workItem from="1666192784831" duration="408000" />
+      <workItem from="1666193235500" duration="2019000" />
+      <workItem from="1666195294199" duration="417000" />
+      <workItem from="1666206693772" duration="1117000" />
+      <workItem from="1666281719417" duration="2196000" />
+      <workItem from="1666365166620" duration="1721000" />
+      <workItem from="1666370393736" duration="2383000" />
+      <workItem from="1666377420503" duration="5909000" />
+      <workItem from="1666887570207" duration="575000" />
+      <workItem from="1666975452940" duration="80000" />
+      <workItem from="1667411531157" duration="133000" />
+      <workItem from="1668619976111" duration="26000" />
+      <workItem from="1673558453993" duration="8000" />
+      <workItem from="1673637599920" duration="299000" />
+      <workItem from="1674160635743" duration="626000" />
+      <workItem from="1674231862460" duration="3213000" />
+      <workItem from="1674762625829" duration="1121000" />
+      <workItem from="1674763816040" duration="377000" />
+      <workItem from="1674765225463" duration="348000" />
+      <workItem from="1675717023080" duration="4247000" />
+      <workItem from="1675796026354" duration="46000" />
+      <workItem from="1675876968280" duration="146000" />
+      <workItem from="1675980281583" duration="340000" />
+      <workItem from="1676917918334" duration="1276000" />
+      <workItem from="1676948467736" duration="4595000" />
+      <workItem from="1676998427534" duration="986000" />
+      <workItem from="1677082187432" duration="5117000" />
+      <workItem from="1677102955869" duration="1253000" />
+      <workItem from="1677117574070" duration="3783000" />
+      <workItem from="1677185800825" duration="246000" />
+      <workItem from="1677186875569" duration="504000" />
+      <workItem from="1678802781149" duration="3174000" />
+      <workItem from="1678806208367" duration="6251000" />
+      <workItem from="1678824269326" duration="1821000" />
+      <workItem from="1678911619309" duration="3760000" />
+      <workItem from="1679703231638" duration="793000" />
+      <workItem from="1680105602645" duration="8559000" />
+      <workItem from="1680275024878" duration="6386000" />
     </task>
-    <task id="LOCAL-00001" summary="use proper tk.filedialog to save output">
-      <created>1664203060567</created>
+    <task id="LOCAL-00001" summary="Supressing (old) main&#10;newmain -&gt; main&#10;&#10;Supressing (old) Utils&#10;newUtils-&gt; Utils">
+      <created>1666195487379</created>
       <option name="number" value="00001" />
       <option name="presentableId" value="LOCAL-00001" />
       <option name="project" value="LOCAL" />
-      <updated>1664203060567</updated>
+      <updated>1666195487379</updated>
     </task>
-    <task id="LOCAL-00002" summary="Comment the code">
-      <created>1664203098420</created>
+    <task id="LOCAL-00002" summary="update">
+      <created>1666195531528</created>
       <option name="number" value="00002" />
       <option name="presentableId" value="LOCAL-00002" />
       <option name="project" value="LOCAL" />
-      <updated>1664203098420</updated>
+      <updated>1666195531528</updated>
     </task>
-    <task id="LOCAL-00003" summary="New main code in proper OOP way to be more flexible">
-      <created>1664203145505</created>
+    <task id="LOCAL-00003" summary="Experiment.analyze() returns only a dataframe, don't save it as a csv directly">
+      <created>1666195695387</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1664203145505</updated>
+      <updated>1666195695387</updated>
     </task>
-    <task id="LOCAL-00004" summary="Improve area selector&#10;Rename : calibvideo.py --&gt; selectArena.py">
-      <created>1664203221151</created>
+    <task id="LOCAL-00004" summary="Add docstrings">
+      <created>1666382936039</created>
       <option name="number" value="00004" />
       <option name="presentableId" value="LOCAL-00004" />
       <option name="project" value="LOCAL" />
-      <updated>1664203221151</updated>
+      <updated>1666382936039</updated>
     </task>
-    <task id="LOCAL-00005" summary="Comment the code, add dictSerializer class to import JSON as dict">
-      <created>1664203280474</created>
+    <task id="LOCAL-00005" summary="Add docstrings and minors changes">
+      <created>1666382965104</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1664203280474</updated>
+      <updated>1666382965104</updated>
     </task>
-    <task id="LOCAL-00006" summary="Create a function to crop in size and length a selected video&#10;press Q to save modification&#10;press C to crop video">
-      <created>1664203342647</created>
+    <task id="LOCAL-00006" summary="Add verbose">
+      <created>1666463254608</created>
       <option name="number" value="00006" />
       <option name="presentableId" value="LOCAL-00006" />
       <option name="project" value="LOCAL" />
-      <updated>1664203342647</updated>
+      <updated>1666463254608</updated>
     </task>
-    <task id="LOCAL-00007" summary="Update">
-      <created>1664210834470</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1664210834470</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,17 +221,28 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="use proper tk.filedialog to save output" />
-    <MESSAGE value="Comment the code" />
-    <MESSAGE value="New main code in proper OOP way to be more flexible" />
-    <MESSAGE value="Improve area selector&#10;Rename : calibvideo.py --&gt; selectArena.py" />
-    <MESSAGE value="Comment the code, add dictSerializer class to import JSON as dict" />
-    <MESSAGE value="Create a function to crop in size and length a selected video&#10;press Q to save modification&#10;press C to crop video" />
-    <MESSAGE value="Update" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+    <MESSAGE value="Supressing (old) main&#10;newmain -&gt; main&#10;&#10;Supressing (old) Utils&#10;newUtils-&gt; Utils" />
+    <MESSAGE value="update" />
+    <MESSAGE value="Experiment.analyze() returns only a dataframe, don't save it as a csv directly" />
+    <MESSAGE value="Add docstrings" />
+    <MESSAGE value="Add docstrings and minors changes" />
+    <MESSAGE value="Add verbose" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add verbose" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/DeepLodocusGit$GUI_DLDC.coverage" NAME="python 3.10 Coverage Results" MODIFIED="1664828396210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
-    <SUITE FILE_PATH="coverage/DeepLodocusGit$videoCrop.coverage" NAME="videoCrop Coverage Results" MODIFIED="1664827697252" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$zaza.coverage" NAME="zaza Coverage Results" MODIFIED="1675717443711" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$GUI_DLDC.coverage" NAME="GUI_DLDC Coverage Results" MODIFIED="1676948810969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$te.coverage" NAME="te Coverage Results" MODIFIED="1677104403427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$testfile.coverage" NAME="testfile Coverage Results" MODIFIED="1674233751948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$main.coverage" NAME="main Coverage Results" MODIFIED="1680109547055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$Utils.coverage" NAME="Utils Coverage Results" MODIFIED="1680195857121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$cham.coverage" NAME="cham Coverage Results" MODIFIED="1666206722643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$saveimp.coverage" NAME="saveimp Coverage Results" MODIFIED="1678919472549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$newmain.coverage" NAME="newmain Coverage Results" MODIFIED="1666194723845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$videoCrop.coverage" NAME="videoCrop Coverage Results" MODIFIED="1680107143932" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$pixelCalib.coverage" NAME="pixelCalib Coverage Results" MODIFIED="1676918854955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$test.coverage" NAME="test Coverage Results" MODIFIED="1680276564702" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$testttt.coverage" NAME="testttt Coverage Results" MODIFIED="1680282559494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$selectArena.coverage" NAME="selectArena Coverage Results" MODIFIED="1673637871164" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
   </component>
 </project>
