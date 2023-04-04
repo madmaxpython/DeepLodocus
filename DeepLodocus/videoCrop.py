@@ -1,7 +1,7 @@
 import cv2
 import datetime
 import time
-from newUtils import AreaSelector, file_selector, file_saver
+from Utils import AreaSelector, file_selector, file_saver
 
 
 class videocropper:
@@ -65,9 +65,7 @@ class videocropper:
                 print(f"End at {str(datetime.timedelta(seconds=END_VIDEO / self.FPS))}")
                 fourcc = cv2.VideoWriter_fourcc(*'mp4v')
 
-                #output_name = file_saver("Select where to save video", [("Video files", ".mp4")])
-
-                writer = cv2.VideoWriter('testimputer.mp4', fourcc, self.FPS,
+                writer = cv2.VideoWriter(f'test.mp4', fourcc, self.FPS,
                     (self.video_width, self.video_height))
 
                 start_time = time.time()
@@ -97,5 +95,4 @@ if __name__ == "__main__":
     file_path = file_selector("Select video(s) to edit", True, [("Video files", ".mp4 .MOV .avi")])
 
     for file in file_path:
-        print(file)
         videocropper(file)
