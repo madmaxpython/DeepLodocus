@@ -4,7 +4,7 @@ import numpy as np
 from pathlib import Path
 import matplotlib.pyplot as plt
 import cv2
-from newUtils import file_selector
+from Utils import file_selector
 
 SCRIPT_PATH = str(Path(__file__).parent)
 
