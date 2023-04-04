@@ -9,8 +9,7 @@ Created on Mon Apr 25 16:40:02 2022
 import glob
 import yaml
 import os
-from pathlib import Path
-from newUtils import AreaSelector, DictSerializer, YamlConfig
+from Utils import AreaSelector, YamlConfig
 import numpy as np
 
 
@@ -48,25 +47,23 @@ yaml.add_representer(np.ndarray, represent_ndarray)
 yaml.add_representer(np.float64, represent_scalar)
 yaml.add_representer(tuple, represent_tuple)
 
+
 def Arena_selector(VIDEO_PATH, VIDEO_EXTENSION, CONFIG_PATH):
-    SCRIPT_PATH = str(Path(__file__).parent)
 
-    config_YAML = YamlConfig(CONFIG_PATH)
+    config_yaml = YamlConfig(CONFIG_PATH)
+    config = config_yaml.load()
 
-    config = config_YAML.load()
-
-    VIDEO_TO_TREAT = []
+    video_to_treat = []
     for file in glob.glob(os.path.join(VIDEO_PATH, f"*{VIDEO_EXTENSION}")):
-        VIDEO_TO_TREAT.append(file.split("/")[-1])
-    print(VIDEO_TO_TREAT)
-    VIDEO_TO_TREAT = sorted(VIDEO_TO_TREAT)
+        video_to_treat.append(file.split("/")[-1])
+    video_to_treat = sorted(video_to_treat)
 
     sample_files = list()
 
-    for file_name in VIDEO_TO_TREAT:
+    for file_name in video_to_treat:
         file_number = file_name[0]
         if file_number not in sample_files:
-            example_file = next(file for file in VIDEO_TO_TREAT if file.startswith(file_number))
+            example_file = next(file for file in video_to_treat if file.startswith(file_number))
             sample_files.append(example_file)
 
     area_coord = ZoneSelector(config, VIDEO_PATH, sample_files)
@@ -75,4 +72,4 @@ def Arena_selector(VIDEO_PATH, VIDEO_EXTENSION, CONFIG_PATH):
 
     config['ZONE'].update(area_coord)
 
-    config_YAML.save(config)
+    config_yaml.save(config)
