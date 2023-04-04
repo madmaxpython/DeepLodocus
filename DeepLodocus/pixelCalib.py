@@ -3,8 +3,9 @@ import random
 from numpy import sqrt as sqrt
 from tkinter import Tk, simpledialog
 from matplotlib.widgets import PolygonSelector
-from newUtils import DictSerializer, file_selector, AskInput
+from Utils import DictSerializer, file_selector, AskInput
 import cv2
+import yaml
 from matplotlib.widgets import Button
 
 
@@ -54,16 +55,18 @@ def ploter(filepath):
     return(linebuilder.line.get_data())
 
 
-if __name__ == '__main__':
+def Calibrator (video_path, CONFIG_PATH):
 
-    coord = ploter(file_selector('Select video to calibrate', False, [("Video files", ".mp4 .MOV .avi")])[0])
+    coord = ploter(video_path)
 
     distance_px = sqrt((coord[0][0] - coord[1][0]) ** 2 + (coord[0][1] - coord[1][1]) ** 2)
 
     distance_cm = AskInput('Calibration', 'Size in cm (use "." as decimal separator)', float).get_entry()
 
-    config = DictSerializer.loadJSON("config.txt")
+    pixel_size = distance_cm / distance_px
 
-    config["px_size"] = distance_cm / distance_px
+    return pixel_size
 
-    DictSerializer.saveJSON(config, "config.txt")
+
+
+Calibrator('/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas/videos/1_10BR.mp4', '/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas/config.yaml')
