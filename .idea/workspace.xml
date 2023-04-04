@@ -7,17 +7,6 @@
     <list default="true" id="968f8155-6503-45d0-9c1a-9b5d1b8afdc5" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/TEST.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/TEST.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/config.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/config.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/newUtils.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/Utils.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/newmain.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/selectArena.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/selectArena.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/splitDatas.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/splitDatas.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/utils.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/videoCrop.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +51,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;debugger.dataViews.python.type.renderers&quot;
   }
 }</component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.videoCrop">
     <configuration name="saveimp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DeepLodocusGit" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -163,6 +152,7 @@
       <workItem from="1680620622222" duration="11882000" />
       <workItem from="1680638021651" duration="11000" />
       <workItem from="1680638039081" duration="4486000" />
+      <workItem from="1680642920841" duration="308000" />
     </task>
     <task id="LOCAL-00001" summary="Supressing (old) main&#10;newmain -&gt; main&#10;&#10;Supressing (old) Utils&#10;newUtils-&gt; Utils">
       <created>1666195487379</created>
