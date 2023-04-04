@@ -2,8 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 from pathlib import Path
-from DeepLodocus.newUtils import total_time, total_distance, DictSerializer
-import cv2
+from DeepLodocus.newUtils import total_time, total_distance, YamlConfig
 
 
 class Experiment:
@@ -46,12 +45,13 @@ class Experiment:
             likelihood_threshold: float = 0.9,
             enable_iterative_imputer: bool = True,
             table_format: str = '.csv',
-            video_format: str = ".mp4"
+            video_format: str = ".mp4",
+            config_path: str = 'config.yaml'
     ):
 
         ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
         self.path_experiment = path_experiment
-
+        self.config_path = config_path
         self.path_csv = f'{path_experiment}/csvfiles/'
         self.table_format = table_format
         self.list_csv = sorted([os.path.join(self.path_csv, i) for i in os.listdir(self.path_csv)
@@ -77,10 +77,9 @@ class Experiment:
         print("Use the '.load_animal' function to load datas\n")
     @property
     def config(self):
-        config = Parser.load(self.deeplodocus_path + '/config.ini')
-        # config['VIDEO']['fps_camera'] = cv2.VideoCapture(self.list_video[0]).get(cv2.CAP_PROP_FPS)
-        # Parser.save(config, self.deeplodocus_path + '/config.ini')
-        return config
+        config = YamlConfig(self.config_path)
+        config_dict = config.load()
+        return config_dict
 
     def load_animal(self, animal_model):
         """
@@ -101,25 +100,27 @@ class Experiment:
 
         print("Datas loaded")
         print("You can now use the '.analyze' function to process the data")
-
-    def analyze(self,**behavior)
-
-        print(self.config)
-        for measurement in self.config['ANALYZE']:
+    def area_definition(self):
+        from selectArena import Arena_selector
+        aga = Arena_selector(self.path_videos, self.video_format, self.config_path)
+        return aga
+    def analyze(self, **behavior):
+        behavior_to_analyze = self.config['ANALYZE']
+        for measurement in behavior_to_analyze:
             if measurement in behavior:
-                self.config['ANALYZE'][measurement] = behavior[measurement]
+                behavior_to_analyze[measurement] = behavior[measurement]
 
-        areas_dict = DictSerializer.loadJSON(self.deeplodocus_path + "/zone.txt")
+        areas_dict = self.config['ZONE']
 
         ## Create the empty dataframe_output ###
         columns = {"Animal ID": []}
-        if self.config['ANALYZE']["distance"]:
+        if behavior_to_analyze["distance"]:
             columns["Distance"] = []
-        if self.config['ANALYZE']["time_zone"]:
+        if behavior_to_analyze["time_zone"]:
             for zone in self.config['ZONE']["zone_name"]:
                 columns[f"Time in {zone}"] = []
 
-        if self.config['ANALYZE']["entries_zone"]:
+        if behavior_to_analyze["entries_zone"]:
             for zone in self.config['ZONE']["zone_name"]:
                 columns[f"Entries in {zone}"] = []
 
@@ -130,17 +131,15 @@ class Experiment:
 
             measurement = [animal.name]
 
-            if self.config['ANALYZE']["distance"]:
+            if behavior_to_analyze["distance"]:
                 measurement.append(total_distance(animal.tracking_data[:, 6:8],
                                                   animal.likelihood[:, 3],
-                                                  Animal.likelihood_threshold,
                                                   float(self.config['VIDEO']['fps_camera']),
                                                   float(self.config['VIDEO']['px_size'])
                                                   )
                                    )
 
-            if self.config['ANALYZE']["time_zone"] or self.config['ANALYZE'][
-                "entries_zone"]:  # TODO the total_time function is obsolete, needed to be update
+            if behavior_to_analyze["time_zone"] or behavior_to_analyze["entries_zone"]:  # TODO the total_time function is obsolete, needed to be update
                 time_zone = total_time(
                     areas_dict,
                     animal.tracking_data,
