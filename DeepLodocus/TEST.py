@@ -1,7 +1,11 @@
-from newmain import Experiment, Mouse
+from main import Experiment, Mouse
+import glob
 
-project = Experiment(path_experiment='./Datas')
-project.area_definition()
+path = '/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas'
+project = Experiment('/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas')
+
+print(project.config)
 #project.load_animal(Mouse)
-#project.analyze(distance=True)
+#project.area_definition()
 
+#project.analyze(distance=True)
