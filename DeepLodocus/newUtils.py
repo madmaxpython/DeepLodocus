@@ -16,9 +16,12 @@ from tkinter import *
 from tkinter import messagebox, filedialog
 import cv2
 import json
+import yaml
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer
 
 
-def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
+def total_distance(trackingData, likelihood,FPS, PIX_SIZE: float):
     """
     Measure the total distance travelled by the mice, using the 'spine1' label
     Parameters
@@ -59,7 +62,7 @@ def total_distance(trackingData, likelihood, FPS, PIX_SIZE):
                     prev_x_y = curr_x_y
                 j += chunk_size + 1
 
-    tot_dist = np.nansum(temp_dist)
+    tot_dist = np.nansum(temp_dist)/PIX_SIZE
     return tot_dist
 
 
@@ -210,3 +213,29 @@ class DictSerializer:
         with open(path, "r") as dictionary:
             dictionary = json.loads(dictionary.read())
         return dictionary
+
+class YamlConfig:
+    def __init__(self, filename):
+        self.filename = filename
+
+    def load(self):
+        with open(self.filename, 'r') as f:
+            return yaml.safe_load(f)
+
+    def save(self, config_dict):
+        with open(self.filename, 'w') as f:
+            yaml.dump(config_dict, f)
+
+def it_imputer(data, tol=0.01, max_iter=10):
+    """
+    Very simple function to use the sklearn.impute.IterativeImputer
+    Parameters
+    ---------
+    data: np.array -> Data to be treated
+    tol: float -> tolerance threshold to be reached
+    max_iter: int -> max number of iterations to be executed
+    Returns
+    ---------
+    -> np.array : processed data by the sklearn.impute.IterativeImputer
+    """
+    return IterativeImputer(missing_values=np.nan, tol=tol, max_iter=max_iter).fit_transform(data)
