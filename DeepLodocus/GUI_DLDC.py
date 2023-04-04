@@ -10,7 +10,7 @@ import os, glob
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
-from newUtils import file_saver, DictSerializer
+from Utils import file_saver, DictSerializer
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -25,7 +25,7 @@ def relative_to_assets(path: str) -> Path:
 
 def run():
 <<<<<<< Updated upstream
-    from newmain import load_mice, Animal, data_to_csv
+    from main import load_mice, Animal, data_to_csv
     save()
 
     list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
