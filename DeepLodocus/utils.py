@@ -35,6 +35,7 @@ def total_distance(trackingData, likelihood,FPS, PIX_SIZE: float):
     -------
     tot_dist: Total distance travelled
     """
+    print(f"pixel size : {PIX_SIZE}")
 
     temp_dist = []
     chunk_size = int(FPS / 4)

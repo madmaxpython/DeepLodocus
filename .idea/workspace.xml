@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="968f8155-6503-45d0-9c1a-9b5d1b8afdc5" name="Changes" comment="Update">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/GUI_DLDC.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/TEST.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/TEST.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/pixelCalib.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DeepLodocus/selectArena.py" beforeDir="false" afterPath="$PROJECT_DIR$/DeepLodocus/selectArena.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +54,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;debugger.dataViews.python.type.renderers&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.videoCrop">
+  <component name="RunManager">
     <configuration name="saveimp" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="DeepLodocusGit" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -153,6 +156,8 @@
       <workItem from="1680638021651" duration="11000" />
       <workItem from="1680638039081" duration="4486000" />
       <workItem from="1680642920841" duration="308000" />
+      <workItem from="1680705672413" duration="3882000" />
+      <workItem from="1680716213862" duration="5873000" />
     </task>
     <task id="LOCAL-00001" summary="Supressing (old) main&#10;newmain -&gt; main&#10;&#10;Supressing (old) Utils&#10;newUtils-&gt; Utils">
       <created>1666195487379</created>
@@ -227,16 +232,16 @@
     <SUITE FILE_PATH="coverage/DeepLodocusGit$GUI_DLDC.coverage" NAME="GUI_DLDC Coverage Results" MODIFIED="1676948810969" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$te.coverage" NAME="te Coverage Results" MODIFIED="1677104403427" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$testfile.coverage" NAME="testfile Coverage Results" MODIFIED="1674233751948" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
-    <SUITE FILE_PATH="coverage/DeepLodocusGit$TEST.coverage" NAME="TEST Coverage Results" MODIFIED="1680642067950" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$TEST.coverage" NAME="TEST Coverage Results" MODIFIED="1680723786757" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$main.coverage" NAME="main Coverage Results" MODIFIED="1680109547055" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$Utils.coverage" NAME="Utils Coverage Results" MODIFIED="1680195857121" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$cham.coverage" NAME="cham Coverage Results" MODIFIED="1666206722643" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$saveimp.coverage" NAME="saveimp Coverage Results" MODIFIED="1678919472549" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$newmain.coverage" NAME="newmain Coverage Results" MODIFIED="1680635954780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$videoCrop.coverage" NAME="videoCrop Coverage Results" MODIFIED="1680640354777" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
-    <SUITE FILE_PATH="coverage/DeepLodocusGit$pixelCalib.coverage" NAME="pixelCalib Coverage Results" MODIFIED="1680642805532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$pixelCalib.coverage" NAME="pixelCalib Coverage Results" MODIFIED="1680718881620" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$test.coverage" NAME="test Coverage Results" MODIFIED="1680362665097" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
     <SUITE FILE_PATH="coverage/DeepLodocusGit$testttt.coverage" NAME="testttt Coverage Results" MODIFIED="1680282559494" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
-    <SUITE FILE_PATH="coverage/DeepLodocusGit$selectArena.coverage" NAME="selectArena Coverage Results" MODIFIED="1680640097486" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
+    <SUITE FILE_PATH="coverage/DeepLodocusGit$selectArena.coverage" NAME="selectArena Coverage Results" MODIFIED="1680717301347" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/DeepLodocus" />
   </component>
 </project>

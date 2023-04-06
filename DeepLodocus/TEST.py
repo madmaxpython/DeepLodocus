@@ -1,11 +1,13 @@
 from main import Experiment, Mouse
-import glob
 
-path = '/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas'
-project = Experiment('/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas')
+exp = Experiment('/Users/maximeteixeira/Desktop/Datas')
 
-print(project.config)
-#project.load_animal(Mouse)
-#project.area_definition()
 
-#project.analyze(distance=True)
+exp.load_animal(Mouse)
+
+
+exp.area_definition(calibration=True, zone_name=['lines', 'dots'])
+
+exp.analyze(distance = True)
+
+#8076.913557

@@ -1,12 +1,10 @@
 import matplotlib.pyplot as plt
 import random
 from numpy import sqrt as sqrt
-from tkinter import Tk, simpledialog
-from matplotlib.widgets import PolygonSelector
-from Utils import DictSerializer, file_selector, AskInput
+import os
+from Utils import AskInput
 import cv2
-import yaml
-from matplotlib.widgets import Button
+
 
 
 class LineBuilder:
@@ -55,18 +53,14 @@ def ploter(filepath):
     return(linebuilder.line.get_data())
 
 
-def Calibrator (video_path, CONFIG_PATH):
+def Calibrator (video_path):
 
     coord = ploter(video_path)
 
     distance_px = sqrt((coord[0][0] - coord[1][0]) ** 2 + (coord[0][1] - coord[1][1]) ** 2)
 
-    distance_cm = AskInput('Calibration', 'Size in cm (use "." as decimal separator)', float).get_entry()
+    distance_cm = float(input('Distance in cm : '))
 
     pixel_size = distance_cm / distance_px
 
     return pixel_size
-
-
-
-Calibrator('/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas/videos/1_10BR.mp4', '/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas/config.yaml')

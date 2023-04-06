@@ -1,10 +1,30 @@
-import pandas as pd
-import numpy as np
-import os,  glob
+import glob
+import os
 import shutil
 from pathlib import Path
-from DeepLodocus.Utils import total_time, total_distance, YamlConfig
 import cv2
+import numpy as np
+import pandas as pd
+import yaml
+
+from DeepLodocus.Utils import total_time, total_distance, YamlConfig
+
+
+class ConfigExp(dict):
+    def __init__(self, exp_path):
+        self.yaml_file = os.path.join(exp_path, 'config.yaml')
+
+        if self.yaml_file not in glob.glob(exp_path):
+            shutil.copy(os.path.join(Experiment.deeplodocus_path, 'config.yaml'), self.yaml_file)
+
+        with open(self.yaml_file) as f:
+            yaml_dict = yaml.safe_load(f)
+            super().__init__(yaml_dict)
+
+    def __setitem__(self, key, value):
+        super().__setitem__(key, value)
+        with open(self.yaml_file, 'w') as f:
+            yaml.dump(dict(self), f)
 
 
 class Experiment:
@@ -48,18 +68,14 @@ class Experiment:
             enable_iterative_imputer: bool = True,
             table_format: str = '.csv',
             video_format: str = ".mp4",
-
     ):
 
         ### CREATE USEFUL PATH STRING + LIST OF CSV & VIDEOS ###
-        self.path_experiment = path_experiment
+        self.experiment_path = path_experiment
+
+        self._config = ConfigExp(self.experiment_path)
+
         self.path_csv = f'{path_experiment}/csvfiles/'
-
-        self.config_path = os.path.join(self.path_experiment, 'config.yaml')
-
-        if self.config_path not in glob.glob(self.path_experiment):
-            shutil.copy(os.path.join(Experiment.deeplodocus_path,'config.yaml'), self.config_path)
-
         self.table_format = table_format
         self.list_csv = sorted([os.path.join(self.path_csv, i) for i in os.listdir(self.path_csv)
                                 if not i.startswith(".") and i.endswith(self.table_format)])
@@ -83,13 +99,10 @@ class Experiment:
 
     @property
     def config(self):
-        config = YamlConfig(self.config_path)
-        config_dict = config.load()
         video = cv2.VideoCapture(self.list_video[0])
-        config_dict['VIDEO']['fps_camera'] = int(video.get(cv2.CAP_PROP_FPS))
-        print(config_dict)
-        config.save(config_dict)
-        return config_dict
+        self._config['VIDEO']['fps_camera'] = int(video.get(cv2.CAP_PROP_FPS))
+        YamlConfig(self._config.yaml_file).save(self._config)
+        return self._config
 
     def load_animal(self, animal_model):
         """
@@ -111,22 +124,31 @@ class Experiment:
         print("Datas loaded")
         print("You can now use the '.analyze' function to process the data")
 
-    def area_definition(self, calibration = True):
+    def area_definition(self, calibration=True, **kwargs):
         from selectArena import Arena_selector
-        zone_dict = Arena_selector(self.path_videos, self.video_format, self.config_path)
+
+        if 'zone_name' in kwargs:
+            self.config['ZONE']['zone_name'] = kwargs['zone_name']
+
+        zone_dict = Arena_selector(self.path_videos, self.video_format, self.config)
+
+        self.config['ZONE'] = {'zone_name': self.config['ZONE']['zone_name']}
+
+        self.config['ZONE'].update(zone_dict)
 
         if calibration == True:
             from pixelCalib import Calibrator
-            Calibrator(self.path_videos[0])
+            px= Calibrator(self.list_video[0])
+            self.config['VIDEO']['px_size'] = px
 
         return zone_dict
 
-
     def analyze(self, **behavior):
         behavior_to_analyze = self.config['ANALYZE']
-        for measurement in behavior_to_analyze:
-            if measurement in behavior:
-                behavior_to_analyze[measurement] = behavior[measurement]
+
+        for measurement in behavior:
+            if measurement in behavior_to_analyze:
+                self.config['ANALYZE'][measurement] = behavior[measurement]
 
         areas_dict = self.config['ZONE']
 
@@ -162,8 +184,7 @@ class Experiment:
                 time_zone = total_time(
                     areas_dict,
                     animal.tracking_data,
-                    animal.likelihood
-                )
+                    animal.likelihood)
                 print(time_zone)
                 # if time_zone:
                 #   measurement.append(time_zone)

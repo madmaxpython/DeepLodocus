@@ -48,10 +48,7 @@ yaml.add_representer(np.float64, represent_scalar)
 yaml.add_representer(tuple, represent_tuple)
 
 
-def Arena_selector(VIDEO_PATH, VIDEO_EXTENSION, CONFIG_PATH):
-
-    config_yaml = YamlConfig(CONFIG_PATH)
-    config = config_yaml.load()
+def Arena_selector(VIDEO_PATH, VIDEO_EXTENSION, config):
 
     video_to_treat = []
     for file in glob.glob(os.path.join(VIDEO_PATH, f"*{VIDEO_EXTENSION}")):
@@ -66,10 +63,4 @@ def Arena_selector(VIDEO_PATH, VIDEO_EXTENSION, CONFIG_PATH):
             example_file = next(file for file in video_to_treat if file.startswith(file_number))
             sample_files.append(example_file)
 
-    area_coord = ZoneSelector(config, VIDEO_PATH, sample_files)
-
-    config['ZONE'] = {'zone_name': config['ZONE']['zone_name']}
-
-    config['ZONE'].update(area_coord)
-
-    config_yaml.save(config)
+    return ZoneSelector(config, VIDEO_PATH, sample_files)
