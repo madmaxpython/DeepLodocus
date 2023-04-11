@@ -1,11 +1,10 @@
 import matplotlib.pyplot as plt
 import random
 from numpy import sqrt as sqrt
-from tkinter import Tk, simpledialog
-from matplotlib.widgets import PolygonSelector
-from newUtils import DictSerializer, file_selector, AskInput
+import os
+from Utils import AskInput
 import cv2
-from matplotlib.widgets import Button
+
 
 
 class LineBuilder:
@@ -54,16 +53,14 @@ def ploter(filepath):
     return(linebuilder.line.get_data())
 
 
-if __name__ == '__main__':
+def Calibrator (video_path):
 
-    coord = ploter(file_selector('Select video to calibrate', False, [("Video files", ".mp4 .MOV .avi")])[0])
+    coord = ploter(video_path)
 
     distance_px = sqrt((coord[0][0] - coord[1][0]) ** 2 + (coord[0][1] - coord[1][1]) ** 2)
 
-    distance_cm = AskInput('Calibration', 'Size in cm (use "." as decimal separator)', float).get_entry()
+    distance_cm = float(input('Distance in cm : '))
 
-    config = DictSerializer.loadJSON("config.txt")
+    pixel_size = distance_cm / distance_px
 
-    config["px_size"] = distance_cm / distance_px
-
-    DictSerializer.saveJSON(config, "config.txt")
+    return pixel_size

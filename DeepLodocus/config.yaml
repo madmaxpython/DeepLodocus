@@ -1,0 +1,10 @@
+ANALYZE:
+  distance: false
+  entries_zone: false
+  time_zone: false
+VIDEO:
+  fps_camera:
+  px_size:
+ZONE:
+  zone_name:
+  -

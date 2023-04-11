@@ -10,7 +10,7 @@ import os, glob
 import json
 from pathlib import Path
 from tkinter import Tk, Canvas, Entry, Button, PhotoImage
-from newUtils import file_saver, DictSerializer
+from Utils import file_saver, DictSerializer
 
 OUTPUT_PATH = str(Path(__file__).parent)
 ASSETS_PATH = OUTPUT_PATH / Path("./assets")
@@ -24,19 +24,28 @@ def relative_to_assets(path: str) -> Path:
 
 
 def run():
-    from newmain import load_mice, Animal, data_to_csv
+<<<<<<< Updated upstream
+    from main import load_mice, Animal, data_to_csv
     save()
 
     list_csv = glob.glob(os.path.join(OUTPUT_PATH, 'Datas', "*.csv"))
     load_mice(list_csv)
+=======
+    from main import Experiment, Mouse
+    deeplodocus_path = str(Path(__file__).parent)
 
-    for animal in Animal.animal_list:
-        print(animal.name)
-        Animal.analyse(animal)
+    exp = Experiment('/Users/maximeteixeira/Desktop/DeepLodocusGit/DeepLodocus/Datas', video_format='.mov')
+>>>>>>> Stashed changes
 
+    exp.load_animal(Mouse)
+
+<<<<<<< Updated upstream
     file_name = file_saver("Select path to save output", [("CSV file", ".csv")])
+=======
+    exp.analyze(distance=True)
+>>>>>>> Stashed changes
 
-    return data_to_csv(Animal.DataFrame_Results, file_name)
+    print(exp.animal_list)
 
 
 def selectzone():
